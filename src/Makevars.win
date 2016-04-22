@@ -1,0 +1,13 @@
+# Links against libprotobuf build from Rtools gcc toolchain.
+COMPILED_BY ?= gcc-4.6.3
+PKG_CPPFLAGS= -I../windows/protobuf-2.6.1/include
+PKG_LIBS= -L../windows/protobuf-2.6.1/lib${subst gcc,,${COMPILED_BY}}${R_ARCH} -lprotobuf
+
+$(OBJECTS): winlibs
+
+winlibs: clean
+	"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" "../tools/winlibs.R"
+	cp ../windows/protobuf-2.6.1/rexp/* .
+
+clean:
+	rm -f $(OBJECTS) $(SHLIB)
