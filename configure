@@ -83,7 +83,8 @@ cd src
 PATH="/usr/bin:$PATH"
 protoc rexp.proto --cpp_out=.
 if [ $? -ne 0 ]; then
-  echo "Error: failed to compile rexp.proto file. Please install protobuf-compiler for your system."
+  echo "Error: failed to compile rexp.proto file."
+  echo "Please install the 'protobuf-compiler' package for your system."
   exit 1
 fi
 
