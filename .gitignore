@@ -8,3 +8,4 @@ src/rexp.pb.cc
 src/rexp.pb.h
 src/Makevars
 inst/doc
+windows
