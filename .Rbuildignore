@@ -4,3 +4,5 @@
 ^windows
 ^\.travis\.yml$
 ^appveyor\.yml$
+^src/rexp.pb.cc$
+^src/rexp.pb.h$
