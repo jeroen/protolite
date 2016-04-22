@@ -80,6 +80,7 @@ sed -e "s|@cflags@|$PKG_CFLAGS|" -e "s|@libs@|$PKG_LIBS|" src/Makevars.in > src/
 
 # Compile protoc file
 cd src
+PATH="/usr/bin:$PATH"
 ${PROTOC_PATH}protoc rexp.proto --cpp_out=.
 if [ $? -ne 0 ]; then
   echo "Error: failed to compile rexp.proto file. Please install protobuf-compiler for your system."
