@@ -39,6 +39,7 @@ rexp::REXP rexp_string(Rcpp::StringVector x){
       val->set_isna(true);
     } else {
       //always store as utf8
+      val->set_isna(false);
       Rcpp::String str = x[i];
       str.set_encoding(CE_UTF8);
       val->set_strval(str.get_cstring());
