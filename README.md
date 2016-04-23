@@ -22,7 +22,7 @@ buf <- serialize_pb(iris)
 out <- unserialize_pb(buf)
 stopifnot(identical(iris, out))
 
-#Fully compatible with RProtoBuf
+# Fully compatible with RProtoBuf
 buf <- RProtoBuf::serialize_pb(iris, NULL)
 out <- protolite::unserialize_pb(buf)
 stopifnot(identical(iris, out))
@@ -42,7 +42,7 @@ Binary packages for __OS-X__ or __Windows__ can be installed directly from CRAN:
 install.packages("protolite")
 ```
 
-Installation from source on Linux or OSX requires Google's [Protocol Buffers](https://developers.google.com/protocol-buffers/) library. On __Debian or Ubuntu__ install [libprotobuf-dev](https://packages.debian.org/testing/libprotobuf-dev) and [protobuf-compiler](https://packages.debian.org/testing/protobuf-compiler)
+Installation from source on Linux or OSX requires Google's [Protocol Buffers](https://developers.google.com/protocol-buffers/) library. On __Debian or Ubuntu__ install [libprotobuf-dev](https://packages.debian.org/testing/libprotobuf-dev) and [protobuf-compiler](https://packages.debian.org/testing/protobuf-compiler):
 
 ```
 sudo apt-get install -y libprotobuf-dev protobuf-compiler
