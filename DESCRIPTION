@@ -6,7 +6,7 @@ Maintainer: Jeroen Ooms <jeroen.ooms@stat.ucla.edu>
 Description: High-performance C++ reimplementation of the object serialization
     functionality from the RProtoBuf package. Permissively licensed, fully
     compatible, no bloat.
-Version: 0.1
+Version: 1.0
 License: MIT + file LICENSE
 SystemRequirements: libprotobuf and protobuf-compiler
 LinkingTo: Rcpp
