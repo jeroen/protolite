@@ -1,8 +1,9 @@
 #' Serialize to Protocol Buffers
 #'
 #' Serializes R objects to a general purpose protobuf message. It uses the same
-#' \code{rexp.proto} descriptor and mapping between R objects and protobuf messages
-#' as RHIPE and the \code{RProtoBuf} package.
+#' \href{https://github.com/jeroenooms/protolite/blob/master/src/rexp.proto}{rexp.proto}
+#' descriptor and mapping between R objects and protobuf messages as RHIPE and the
+#' \link[RProtoBuf:serialize_pb]{RProtoBuf} package.
 #'
 #' The \code{serialize_pb} and \code{unserialize_pb} reimplement the identically
 #' named functions from the \code{RProtoBuf} package in pure \code{C++}. This makes
