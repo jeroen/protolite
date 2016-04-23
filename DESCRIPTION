@@ -3,15 +3,15 @@ Type: Package
 Title: Fast and Simple Object Serialization to Protocol Buffers
 Author: Jeroen Ooms
 Maintainer: Jeroen Ooms <jeroen.ooms@stat.ucla.edu>
-Description: High-performance C++ re-implementation of the object serialization
-    functionality from the 'RProtoBuf' package. Permissively licensed, fully
-    compatible, no bloat.
-Version: 1.0
+Description: Optimized C++ implementation of object serialization functionality
+    from the 'RProtoBuf' package. Permissively licensed, lightweight and fully
+    compatible with 'RProtoBuf'.
+Version: 1.0.1
 License: MIT + file LICENSE
 URL: https://github.com/jeroenooms/protolite#readme
 BugReports: https://github.com/jeroenooms/protolite/issues
 SystemRequirements: libprotobuf and protobuf-compiler
 LinkingTo: Rcpp
 Imports: Rcpp
-Suggests: testthat
+Suggests: testthat, RProtoBuf
 RoxygenNote: 5.0.1
