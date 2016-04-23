@@ -12,6 +12,10 @@
 > Optimized C++ implementation of object serialization functionality
   from the 'RProtoBuf' package. Permissively licensed, lightweight and fully
   compatible with 'RProtoBuf'.
+  
+## See Also
+
+This small package provides a simple and optimized implementation for serializing R objects to the [`rexp.proto`](https://github.com/jeroenooms/protolite/blob/master/src/rexp.proto) schema. Also have a look at the RProtoBuf package which includes a full featured toolkit for working with arbitrary protocol-buffers in R.
 
 ## Hello World
 
