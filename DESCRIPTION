@@ -8,6 +8,8 @@ Description: High-performance C++ reimplementation of the object serialization
     compatible, no bloat.
 Version: 1.0
 License: MIT + file LICENSE
+URL: https://github.com/jeroenooms/protolite#readme
+BugReports: https://github.com/jeroenooms/protolite/issues
 SystemRequirements: libprotobuf and protobuf-compiler
 LinkingTo: Rcpp
 Imports: Rcpp
