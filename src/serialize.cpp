@@ -54,7 +54,7 @@ rexp::REXP rexp_raw(Rcpp::RawVector x){
   return out;
 }
 
-rexp::REXP REXP_native(Rcpp::RObject x){
+rexp::REXP rexp_native(Rcpp::RObject x){
   rexp::REXP out;
   out.set_rclass(rexp::REXP_RClass_NATIVE);
   Rcpp::Function serialize = Rcpp::Environment::namespace_env("base")["serialize"];
@@ -74,7 +74,9 @@ rexp::REXP rexp_complex(Rcpp::ComplexVector x){
   return out;
 }
 
+//needed by rexp_list
 rexp::REXP rexp_object(Rcpp::RObject x);
+
 rexp::REXP rexp_list(Rcpp::List x){
   rexp::REXP out;
   out.set_rclass(rexp::REXP_RClass_LIST);
@@ -106,13 +108,13 @@ rexp::REXP rexp_any(Rcpp::RObject x){
     case STRSXP: return rexp_string(Rcpp::as<Rcpp::StringVector>(x));
     case VECSXP: return rexp_list(Rcpp::as<Rcpp::List>(x));
     case RAWSXP: return rexp_raw(Rcpp::as<Rcpp::RawVector>(x));
-    default: return REXP_native(x);
+    default: return rexp_native(x);
   }
 }
 
 rexp::REXP rexp_object(Rcpp::RObject x){
   rexp::REXP out = rexp_any(x);
-  if(out.rclass() != rexp::REXP_RClass_NULLTYPE){
+  if(out.rclass() != rexp::REXP_RClass_NATIVE){
     std::vector< std::string > attr_names = x.attributeNames();
     int len = attr_names.size();
     for(int i = 0; i < len; i++) {
