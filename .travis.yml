@@ -8,6 +8,7 @@ addons:
   apt:
     packages:
       - libprotobuf-dev
+      - libprotoc-dev
       - protobuf-compiler
 
 r_github_packages:
