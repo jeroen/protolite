@@ -6,7 +6,7 @@
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/jeroenooms/protolite?branch=master&svg=true)](https://ci.appveyor.com/project/jeroenooms/protolite)
 [![Coverage Status](https://codecov.io/github/jeroenooms/protolite/coverage.svg?branch=master)](https://codecov.io/github/jeroenooms/protolite?branch=master)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/protolite)](http://cran.r-project.org/package=protolite)
-[![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/protolite)](http://cran.r-project.org/web/packages/protolite/index.html)
+[![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/protolite)](http://cran.r-project.org/package=protolite)
 [![Github Stars](https://img.shields.io/github/stars/jeroenooms/protolite.svg?style=social&label=Github)](https://github.com/jeroenooms/protolite)
 
 > High-performance C++ reimplementation of the object serialization

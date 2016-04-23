@@ -3,8 +3,8 @@ Type: Package
 Title: Fast and Simple Object Serialization to Protocol Buffers
 Author: Jeroen Ooms
 Maintainer: Jeroen Ooms <jeroen.ooms@stat.ucla.edu>
-Description: High-performance C++ reimplementation of the object serialization
-    functionality from the RProtoBuf package. Permissively licensed, fully
+Description: High-performance C++ re-implementation of the object serialization
+    functionality from the 'RProtoBuf' package. Permissively licensed, fully
     compatible, no bloat.
 Version: 1.0
 License: MIT + file LICENSE
