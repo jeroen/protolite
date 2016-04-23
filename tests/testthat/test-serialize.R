@@ -35,7 +35,7 @@ test_that("Native objects get serialized correctly", {
 
   # Doesn't work due to evaluated calls
   # See http://stackoverflow.com/questions/36808581/how-to-prevent-rcpp-from-evaluating-call-objects
-  #expect_equal(glm_obj, unserialize_pb(serialize_pb(glm_obj, NULL)))
-  #expect_equal(summary_obj, unserialize_pb(serialize_pb(summary_obj, NULL)))
+  expect_equal(glm_obj, unserialize_pb(serialize_pb(glm_obj, NULL)))
+  expect_equal(summary_obj, unserialize_pb(serialize_pb(summary_obj, NULL)))
 })
 

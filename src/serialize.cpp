@@ -57,8 +57,15 @@ rexp::REXP rexp_raw(Rcpp::RawVector x){
 rexp::REXP rexp_native(Rcpp::RObject x){
   rexp::REXP out;
   out.set_rclass(rexp::REXP_RClass_NATIVE);
-  Rcpp::Function serialize = Rcpp::Environment::namespace_env("base")["serialize"];
-  Rcpp::RawVector buf = serialize(x, R_NilValue);
+
+  /* This looks nicer but it doesn't work for 'call' objects
+   Rcpp::Function serialize = Rcpp::Environment::namespace_env("base")["serialize"];
+   Rcpp::RawVector buf = serialize(x, R_NilValue);
+   */
+  Rcpp::Environment env;
+  env["MY_R_OBJECT"] = x;
+  Rcpp::ExpressionVector expr("serialize(MY_R_OBJECT, NULL)");
+  Rcpp::RawVector buf = Rcpp::Rcpp_eval(expr, env);
   out.set_rawvalue(buf.begin(), buf.length());
   return out;
 }
