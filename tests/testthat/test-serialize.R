@@ -23,3 +23,19 @@ test_that("Objects get serialized and unserialized correctly",{
 
   expect_equal(myobject, unserialize_pb(serialize_pb(myobject, NULL)))
 })
+
+test_that("Native objects get serialized correctly", {
+  # Examples from ?glm
+  glm_obj <- glm(cyl ~ mpg + factor(carb), data = mtcars, family = poisson())
+  anova_obj <- anova(glm_obj)
+  summary_obj <- summary(glm_obj)
+
+  # Serialize bunch of stuff
+  expect_equal(anova_obj, unserialize_pb(serialize_pb(anova_obj, NULL)))
+
+  # Doesn't work due to evaluated calls
+  # See http://stackoverflow.com/questions/36808581/how-to-prevent-rcpp-from-evaluating-call-objects
+  #expect_equal(glm_obj, unserialize_pb(serialize_pb(glm_obj, NULL)))
+  #expect_equal(summary_obj, unserialize_pb(serialize_pb(summary_obj, NULL)))
+})
+
