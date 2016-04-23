@@ -9,9 +9,9 @@
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/protolite)](https://cran.r-project.org/package=protolite)
 [![Github Stars](https://img.shields.io/github/stars/jeroenooms/protolite.svg?style=social&label=Github)](https://github.com/jeroenooms/protolite)
 
-> High-performance C++ reimplementation of the object serialization
-  functionality from the RProtoBuf package. Permissively licensed, fully
-  compatible, no bloat.
+> Optimized C++ implementation of object serialization functionality
+  from the 'RProtoBuf' package. Permissively licensed, lightweight and fully
+  compatible with 'RProtoBuf'.
 
 ## Hello World
 
