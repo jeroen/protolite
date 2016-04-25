@@ -9,13 +9,14 @@
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/protolite)](https://cran.r-project.org/package=protolite)
 [![Github Stars](https://img.shields.io/github/stars/jeroenooms/protolite.svg?style=social&label=Github)](https://github.com/jeroenooms/protolite)
 
-> Optimized C++ implementation of object serialization functionality
-  from the 'RProtoBuf' package. Permissively licensed, lightweight and fully
-  compatible with 'RProtoBuf'.
+> An optimized, permissively licensed C++ implementation for serializing
+  R objects to protocol-buffers. This package is complementary to the much larger
+  'RProtoBuf' package which provides a full featured toolkit for working with
+  protocol-buffers in R.
   
 ## See Also
 
-This small package contains an optimized C++ implementation for serializing R objects to the [`rexp.proto`](https://github.com/jeroenooms/protolite/blob/master/src/rexp.proto) schema. It is complementary to the much larger RProtoBuf package which provides a full featured toolkit for working with protocol-buffers in R.
+This small package contains an optimized C++ implementation for serializing R objects to the [`rexp.proto`](https://github.com/jeroenooms/protolite/blob/master/src/rexp.proto) schema. It is complementary to the much larger RProtoBuf package which provides a full featured toolkit for working with protocol-buffers in R via the reflection-based interface.
 
 ## Hello World
 
