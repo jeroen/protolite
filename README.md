@@ -16,9 +16,9 @@
   
 ## See Also
 
-This small package contains an optimized C++ implementation for serializing R objects to the [`rexp.proto`](https://github.com/jeroenooms/protolite/blob/master/src/rexp.proto) schema. It is complementary to the much larger RProtoBuf package which provides a full featured toolkit for working with protocol-buffers in R via the reflection-based interface.
+This small package contains an optimized C++ implementation for serializing R objects to the [`rexp.proto`](https://github.com/jeroenooms/protolite/blob/master/src/rexp.proto) schema. Exactly the same `serialize_pb` functionality can also be found in the much larger RProtoBuf package, which provides a full featured toolkit for working with protocol-buffers in R via the reflection-based interface.
 
-For an easy and fast solution to serialize R data to a generic proto schema, the `protolite` package might suffice. To take advantage of the full power of prototol buffers you need the `RProtoBuf` package. With `RProtoBuf` you can create new protocol buffers of a schema, read in .proto files, manipulate fields with type checking that they match the schema, and generate or parse .prototext ascii format protocol buffers.Also have a look at our paper [*RProtoBuf: Efficient Cross-Language Data Serialization in R*](http://arxiv.org/abs/1401.7372).
+For an easy and fast solution to serialize R data to a generic proto schema, the `protolite` package might suffice. To take advantage of the full power of prototol buffers you need the `RProtoBuf` package. With `RProtoBuf` you can create new protocol buffers of a schema, read in .proto files, manipulate fields with type checking that they match the schema, and generate or parse .prototext ascii format protocol buffers. Also have a look at our paper [*RProtoBuf: Efficient Cross-Language Data Serialization in R*](http://arxiv.org/abs/1401.7372).
 
 ## Hello World
 
