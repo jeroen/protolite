@@ -55,19 +55,22 @@ rexp::REXP rexp_raw(Rcpp::RawVector x){
   return out;
 }
 
-rexp::REXP rexp_native(Rcpp::RObject x){
+rexp::REXP rexp_native(Rcpp::RObject x, bool skip_native){
   rexp::REXP out;
   out.set_rclass(rexp::REXP_RClass_NATIVE);
 
-  /* This looks nicer but it doesn't work for 'call' objects
-   Rcpp::Function serialize = Rcpp::Environment::namespace_env("base")["serialize"];
-   Rcpp::RawVector buf = serialize(x, R_NilValue);
-   */
+  if(skip_native)
+    return out;
+
+  /* Solution below looks nicer but Rcpp has bug for 'call' objects
+    Rcpp::Function serialize = Rcpp::Environment::namespace_env("base")["serialize"];
+    Rcpp::RawVector buf = serialize(x, R_NilValue);
+  */
   Rcpp::Environment env;
   env["MY_R_OBJECT"] = x;
   Rcpp::ExpressionVector expr("serialize(MY_R_OBJECT, NULL)");
   Rcpp::RawVector buf = Rcpp::Rcpp_eval(expr, env);
-  out.set_rawvalue(buf.begin(), buf.length());
+  out.set_nativevalue(buf.begin(), buf.length());
   return out;
 }
 
@@ -83,15 +86,14 @@ rexp::REXP rexp_complex(Rcpp::ComplexVector x){
 }
 
 //needed by rexp_list
-rexp::REXP rexp_object(Rcpp::RObject x);
+rexp::REXP rexp_object(Rcpp::RObject x, bool skip_native);
 
-rexp::REXP rexp_list(Rcpp::List x){
+rexp::REXP rexp_list(Rcpp::List x, bool skip_native){
   rexp::REXP out;
   out.set_rclass(rexp::REXP_RClass_LIST);
   for(int i = 0; i < x.length(); i++){
-    rexp::REXP *val = out.add_rexpvalue();
-    rexp::REXP obj = rexp_object(x[i]);
-    val->CopyFrom(obj);
+    rexp::REXP obj = rexp_object(x[i], skip_native);
+    out.add_rexpvalue()->CopyFrom(obj);
   }
   return out;
 }
@@ -106,7 +108,7 @@ rexp::REXP rexp_null(){
 // http://gallery.rcpp.org/articles/rcpp-wrap-and-recurse/
 // http://statr.me/rcpp-note/api/RObject.html
 // can we do this with RObject instead of SEXP ?
-rexp::REXP rexp_any(Rcpp::RObject x){
+rexp::REXP rexp_any(Rcpp::RObject x, bool skip_native){
   switch(TYPEOF(x)){
     case NILSXP: return rexp_null();
     case LGLSXP: return rexp_bool(Rcpp::as<Rcpp::LogicalVector>(x));
@@ -114,30 +116,30 @@ rexp::REXP rexp_any(Rcpp::RObject x){
     case REALSXP: return rexp_real(Rcpp::as<Rcpp::NumericVector>(x));
     case CPLXSXP: return rexp_complex(Rcpp::as<Rcpp::ComplexVector>(x));
     case STRSXP: return rexp_string(Rcpp::as<Rcpp::StringVector>(x));
-    case VECSXP: return rexp_list(Rcpp::as<Rcpp::List>(x));
+    case VECSXP: return rexp_list(Rcpp::as<Rcpp::List>(x), skip_native);
     case RAWSXP: return rexp_raw(Rcpp::as<Rcpp::RawVector>(x));
-    default: return rexp_native(x);
+    default: return rexp_native(x, skip_native);
   }
 }
 
-rexp::REXP rexp_object(Rcpp::RObject x){
-  rexp::REXP out = rexp_any(x);
+rexp::REXP rexp_object(Rcpp::RObject x, bool skip_native){
+  rexp::REXP out = rexp_any(x, skip_native);
   if(out.rclass() != rexp::REXP_RClass_NATIVE){
     std::vector< std::string > attr_names = x.attributeNames();
     int len = attr_names.size();
     for(int i = 0; i < len; i++) {
-      std::string *name = out.add_attrname();
-      name->assign(attr_names[i]);
-      rexp::REXP *val = out.add_attrvalue();
-      val->CopyFrom(rexp_object(x.attr(*name)));
+      std::string name = attr_names[i];
+      rexp::REXP attr = rexp_object(x.attr(name), skip_native);
+      out.add_attrname()->assign(name);
+      out.add_attrvalue()->CopyFrom(attr);
     }
   }
   return out;
 }
 
 // [[Rcpp::export]]
-Rcpp::RawVector cpp_serialize_pb(Rcpp::RObject x){
-  rexp::REXP message = rexp_object(x);
+Rcpp::RawVector cpp_serialize_pb(Rcpp::RObject x, bool skip_native){
+  rexp::REXP message = rexp_object(x, skip_native);
   int size = message.ByteSize();
   Rcpp::RawVector res(size);
   if(!message.SerializeToArray(res.begin(), size))

@@ -6,13 +6,14 @@
 using namespace Rcpp;
 
 // cpp_serialize_pb
-Rcpp::RawVector cpp_serialize_pb(Rcpp::RObject x);
-RcppExport SEXP protolite_cpp_serialize_pb(SEXP xSEXP) {
+Rcpp::RawVector cpp_serialize_pb(Rcpp::RObject x, bool skip_native);
+RcppExport SEXP protolite_cpp_serialize_pb(SEXP xSEXP, SEXP skip_nativeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
     Rcpp::traits::input_parameter< Rcpp::RObject >::type x(xSEXP);
-    __result = Rcpp::wrap(cpp_serialize_pb(x));
+    Rcpp::traits::input_parameter< bool >::type skip_native(skip_nativeSEXP);
+    __result = Rcpp::wrap(cpp_serialize_pb(x, skip_native));
     return __result;
 END_RCPP
 }

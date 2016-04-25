@@ -2,9 +2,14 @@ context("serializing and unserializing")
 
 test_that("Objects get serialized and unserialized correctly",{
   x <- list(foo=cars, bar=Titanic)
-  expect_equal(x, unserialize_pb(serialize_pb(x, NULL)))
-  expect_equal(cars, unserialize_pb(serialize_pb(cars, NULL)))
-  expect_equal(iris, unserialize_pb(serialize_pb(iris, NULL)))
+  expect_equal(x, unserialize_pb(serialize_pb(x)))
+  expect_equal(x, unserialize_pb(serialize_pb(x, skip_native = TRUE)))
+
+  expect_equal(cars, unserialize_pb(serialize_pb(cars)))
+  expect_equal(cars, unserialize_pb(serialize_pb(cars, skip_native = TRUE)))
+
+  expect_equal(iris, unserialize_pb(serialize_pb(iris)))
+  expect_equal(iris, unserialize_pb(serialize_pb(iris, skip_native = TRUE)))
 
   #a bit of everything, copied from jsonlite package
   set.seed('123')
@@ -21,7 +26,8 @@ test_that("Objects get serialized and unserialized correctly",{
     myrawvec = charToRaw('This is a test')
   );
 
-  expect_equal(myobject, unserialize_pb(serialize_pb(myobject, NULL)))
+  expect_equal(myobject, unserialize_pb(serialize_pb(myobject)))
+  expect_equal(myobject, unserialize_pb(serialize_pb(myobject, skip_native = TRUE)))
 })
 
 test_that("Native objects get serialized correctly", {
@@ -31,8 +37,8 @@ test_that("Native objects get serialized correctly", {
   summary_obj <- summary(glm_obj)
 
   # Serialize bunch of stuff
-  expect_equal(anova_obj, unserialize_pb(serialize_pb(anova_obj, NULL)))
-  expect_equal(glm_obj, unserialize_pb(serialize_pb(glm_obj, NULL)))
-  expect_equal(summary_obj, unserialize_pb(serialize_pb(summary_obj, NULL)))
+  expect_equal(glm_obj, unserialize_pb(serialize_pb(glm_obj)))
+  expect_equal(anova_obj, unserialize_pb(serialize_pb(anova_obj)))
+  expect_equal(summary_obj, unserialize_pb(serialize_pb(summary_obj)))
 })
 

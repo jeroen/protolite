@@ -62,7 +62,9 @@ Rcpp::ComplexVector unrexp_complex(rexp::REXP message){
 }
 
 Rcpp::RObject unrexp_native(rexp::REXP message){
-  std::string val = message.rawvalue();
+  if(!message.has_nativevalue())
+    return R_NilValue;
+  std::string val = message.nativevalue();
   Rcpp::RawVector buf(val.length());
   val.copy((char*) buf.begin(), val.length());
   Rcpp::Function unserialize = Rcpp::Environment::namespace_env("base")["unserialize"];
