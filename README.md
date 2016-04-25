@@ -10,9 +10,9 @@
 [![Github Stars](https://img.shields.io/github/stars/jeroenooms/protolite.svg?style=social&label=Github)](https://github.com/jeroenooms/protolite)
 
 > An optimized, permissively licensed C++ implementation for serializing
-  R objects to protocol-buffers. This package is complementary to the much larger
-  'RProtoBuf' package which provides a full featured toolkit for working with
-  protocol-buffers in R.
+  R objects to protocol-buffers. This lightweight package is complementary to the
+  much larger 'RProtoBuf' package which provides a full featured toolkit for
+  working with protocol-buffers in R.
   
 ## See Also
 
