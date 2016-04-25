@@ -1,6 +1,7 @@
 1.1
   - Cross reference to RProtoBuf pkg in description and readme
   - Add option 'skip_native' in serialize_pb()
+  - Fix bug where 'native' objects were stored in 'raw' field
 
 1.0
   - Initial CRAN release
