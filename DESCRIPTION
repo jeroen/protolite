@@ -7,7 +7,7 @@ Description: An optimized, permissively licensed C++ implementation for serializ
     R objects to protocol-buffers. This lightweight package is complementary to the
     much larger 'RProtoBuf' package which provides a full featured toolkit for
     working with protocol-buffers in R.
-Version: 1.1
+Version: 1.1.9000
 License: MIT + file LICENSE
 URL: https://github.com/jeroenooms/protolite#readme
 BugReports: https://github.com/jeroenooms/protolite/issues
