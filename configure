@@ -19,6 +19,7 @@ PKG_CFLAGS=""
 if [ $(command -v pkg-config) ]; then
   PKGCONFIG_CFLAGS=$(pkg-config --cflags --silence-errors ${PKG_CONFIG_NAME})
   PKGCONFIG_LIBS=$(pkg-config --libs ${PKG_CONFIG_NAME})
+  PKGCONFIG_MODVERSION=$(pkg-config --modversion ${PKG_CONFIG_NAME})
 fi
 
 # Note that cflags may be empty in case of success
@@ -78,13 +79,25 @@ fi
 # Write to Makevars
 sed -e "s|@cflags@|$PKG_CFLAGS|" -e "s|@libs@|$PKG_LIBS|" src/Makevars.in > src/Makevars
 
-# Compile protoc file
-cd src
+# Look for 'protoc' compiler
 PATH="$PATH:/usr/bin"
+PROTOC_VERSION=$(protoc --version)
+if [ $? -ne 0 ]; then
+  echo "Failed to run protoc."
+  echo "Please install the 'protobuf-compiler' package for your system."
+  exit 1
+fi
+
+# Try to check if protoc version matches libproto
+if [[ $PROTOC_VERSION != *"$PKGCONFIG_MODVERSION"* ]]; then
+  echo "Warning: protoc version $PROTOC_VERSION might not match libproto version $PKGCONFIG_MODVERSION.";
+fi
+
+# Compile proto file
+cd src
 protoc rexp.proto --cpp_out=.
 if [ $? -ne 0 ]; then
   echo "Error: failed to compile rexp.proto file."
-  echo "Please install the 'protobuf-compiler' package for your system."
   exit 1
 fi
 
