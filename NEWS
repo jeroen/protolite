@@ -1,5 +1,5 @@
 1.2
-  - Move /usr/bin to the end of $PATH when calling protoc
+  - Fix configure script to test if protoc version matches libprotobuf
 
 1.1
   - Cross reference to RProtoBuf pkg in description and readme

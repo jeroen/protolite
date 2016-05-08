@@ -81,16 +81,16 @@ sed -e "s|@cflags@|$PKG_CFLAGS|" -e "s|@libs@|$PKG_LIBS|" src/Makevars.in > src/
 
 # Look for 'protoc' compiler
 if [ $(command -v protoc) ]; then
-  echo "Compiling with $(command -v protoc)"
+  PROTOC_VERSION=$(protoc --version)
+  echo "Using ${PROTOC_VERSION} from $(command -v protoc)"
 else
   echo "Failed to run protoc."
   echo "Please install the 'protobuf-compiler' package for your system."
   exit 1
 fi
 
-
 # Try to check if protoc version matches libproto
-PROTOC_VERSION=$(protoc --version)
+
 if [[ $PROTOC_VERSION != *"$PKGCONFIG_MODVERSION"* ]]; then
   echo "Warning: protoc version $PROTOC_VERSION might not match libproto version $PKGCONFIG_MODVERSION.";
 fi
