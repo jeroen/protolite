@@ -80,7 +80,7 @@ fi
 sed -e "s|@cflags@|$PKG_CFLAGS|" -e "s|@libs@|$PKG_LIBS|" src/Makevars.in > src/Makevars
 
 # Look for 'protoc' compiler
-PATH="$PATH:/usr/bin"
+#PATH="$PATH:/usr/bin"
 PROTOC_VERSION=$(protoc --version)
 if [ $? -ne 0 ]; then
   echo "Failed to run protoc."
