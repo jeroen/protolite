@@ -90,7 +90,6 @@ else
 fi
 
 # Try to check if protoc version matches libproto
-
 if [[ $PROTOC_VERSION != *"$PKGCONFIG_MODVERSION"* ]]; then
   echo "Warning: protoc version $PROTOC_VERSION might not match libproto version $PKGCONFIG_MODVERSION.";
 fi
