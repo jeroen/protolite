@@ -19,7 +19,7 @@ PKG_CFLAGS=""
 if [ $(command -v pkg-config) ]; then
   PKGCONFIG_CFLAGS=$(pkg-config --cflags --silence-errors ${PKG_CONFIG_NAME})
   PKGCONFIG_LIBS=$(pkg-config --libs ${PKG_CONFIG_NAME})
-  PKGCONFIG_MODVERSION=$(pkg-config --modversion ${PKG_CONFIG_NAME})
+  PKGCONFIG_MODVERSION=$(pkg-config --modversion --silence-errors ${PKG_CONFIG_NAME})
 fi
 
 # Note that cflags may be empty in case of success
