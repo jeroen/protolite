@@ -96,9 +96,9 @@ fi
 
 # Compile proto file
 cd src
-protoc rexp.proto --cpp_out=.
+protoc *.proto --cpp_out=.
 if [ $? -ne 0 ]; then
-  echo "Error: failed to compile rexp.proto file."
+  echo "Error: failed to compile proto files."
   exit 1
 fi
 
