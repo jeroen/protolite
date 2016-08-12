@@ -12,3 +12,4 @@ winlibs:
 
 clean:
 	rm -f $(OBJECTS) $(SHLIB) *.pb.cc *.pb.h
+	echo "#error This is a placeholder file." > rexp.pb.cc
