@@ -3,7 +3,6 @@
 ^src/Makevars$
 ^\.travis\.yml$
 ^appveyor\.yml$
-^src/rexp.pb.cc$
 ^src/rexp.pb.h$
 ^python
 ^windows
