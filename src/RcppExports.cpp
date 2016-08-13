@@ -5,6 +5,18 @@
 
 using namespace Rcpp;
 
+// cpp_serialize_geobuf
+RawVector cpp_serialize_geobuf(List x, int decimals);
+RcppExport SEXP protolite_cpp_serialize_geobuf(SEXP xSEXP, SEXP decimalsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< List >::type x(xSEXP);
+    Rcpp::traits::input_parameter< int >::type decimals(decimalsSEXP);
+    __result = Rcpp::wrap(cpp_serialize_geobuf(x, decimals));
+    return __result;
+END_RCPP
+}
 // cpp_serialize_pb
 Rcpp::RawVector cpp_serialize_pb(Rcpp::RObject x, bool skip_native);
 RcppExport SEXP protolite_cpp_serialize_pb(SEXP xSEXP, SEXP skip_nativeSEXP) {
@@ -14,6 +26,17 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< Rcpp::RObject >::type x(xSEXP);
     Rcpp::traits::input_parameter< bool >::type skip_native(skip_nativeSEXP);
     __result = Rcpp::wrap(cpp_serialize_pb(x, skip_native));
+    return __result;
+END_RCPP
+}
+// cpp_unserialize_geobuf
+List cpp_unserialize_geobuf(Rcpp::RawVector x);
+RcppExport SEXP protolite_cpp_unserialize_geobuf(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< Rcpp::RawVector >::type x(xSEXP);
+    __result = Rcpp::wrap(cpp_unserialize_geobuf(x));
     return __result;
 END_RCPP
 }
