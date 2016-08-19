@@ -8,7 +8,7 @@ Description: Optimized C++ implementations for reading and writing protocol-buff
     geojson data. This lightweight package is complementary to the much larger
     'RProtoBuf' package which provides a full featured toolkit for working with
     protocol-buffers in R.
-Version: 1.3.9000
+Version: 1.4
 License: MIT + file LICENSE
 URL: https://github.com/jeroenooms/protolite#readme
 BugReports: https://github.com/jeroenooms/protolite/issues
