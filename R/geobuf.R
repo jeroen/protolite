@@ -36,8 +36,16 @@ geobuf2json <- function(x, pretty = FALSE){
 #' @param json a text string with geojson data
 #' @param decimals how many decimals (digits behind the dot) to store for numbers
 json2geobuf <- function(json, decimals = 6){
-  if(inherits(json, "connection"))
+  if(is.character(json) && length(json) == 1 && nchar(json) < 1000){
+    if(file.exists(json)){
+      json <- file(json)
+    } else if(grepl("^https?://", json)){
+      json <- url(json)
+    }
+  }
+  if(inherits(json, "connection")){
     json <- readLines(json)
+  }
   stopifnot(is.character(json))
   json <- paste(json, collapse = "\n")
   stopifnot(jsonlite::validate(json))
