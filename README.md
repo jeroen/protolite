@@ -61,7 +61,7 @@ geobuf2json(buf) #either in memory
 geobuf2json("countries.buf") #or from disk
 
 # Read directly from geobuf
-mydata <- unserialize_geobuf("countries.buf")
+mydata <- read_geobuf("countries.buf")
 ```
 
 

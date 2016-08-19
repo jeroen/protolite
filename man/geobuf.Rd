@@ -4,10 +4,10 @@
 \alias{geobuf}
 \alias{geobuf2json}
 \alias{json2geobuf}
-\alias{unserialize_geobuf}
+\alias{read_geobuf}
 \title{Geobuf}
 \usage{
-unserialize_geobuf(x, as_data_frame = TRUE)
+read_geobuf(x, as_data_frame = TRUE)
 
 geobuf2json(x, pretty = FALSE)
 

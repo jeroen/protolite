@@ -10,7 +10,7 @@
 #' @name geobuf
 #' @param x file path or raw vector with the serialized \code{geobuf.proto} message
 #' @param as_data_frame simplify geojson data into data frames
-unserialize_geobuf <- function(x, as_data_frame = TRUE){
+read_geobuf <- function(x, as_data_frame = TRUE){
   if(is.character(x) && file.exists(x)){
     x <- readBin(x, raw(), file.info(x)$size)
   }
@@ -26,7 +26,7 @@ unserialize_geobuf <- function(x, as_data_frame = TRUE){
 #' @rdname geobuf
 #' @param pretty indent json, see \link[jsonlite:toJSON]{jsonlite::toJSON}
 geobuf2json <- function(x, pretty = FALSE){
-  out <- unserialize_geobuf(x, as_data_frame = FALSE)
+  out <- read_geobuf(x, as_data_frame = FALSE)
   digits <- max(6, attr(out, "precision"))
   jsonlite::toJSON(out, auto_unbox = TRUE, digits = 6, null = "null", pretty = pretty)
 }

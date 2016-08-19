@@ -2,8 +2,8 @@
 
 export(geobuf2json)
 export(json2geobuf)
+export(read_geobuf)
 export(serialize_pb)
-export(unserialize_geobuf)
 export(unserialize_pb)
 importFrom(Rcpp,sourceCpp)
 importFrom(jsonlite,fromJSON)
