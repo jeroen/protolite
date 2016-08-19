@@ -4,9 +4,10 @@ PKG_CPPFLAGS= -I../windows/protobuf-3.0.0/include
 PKG_LIBS= -L../windows/protobuf-3.0.0/lib${subst gcc,,${COMPILED_BY}}${R_ARCH} \
 	-lprotobuf
 
-all: clean winlibs
+all: winlibs
 
 winlibs:
+	rm -f *.pb.cc *.pb.h
 	"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" "../tools/winlibs.R"
 	../windows/protobuf-3.0.0/bin$(WIN)/protoc *.proto --cpp_out=.
 
