@@ -4,7 +4,6 @@
 ^\.travis\.yml$
 ^appveyor\.yml$
 ^src/.*\.pb\.h$
-^src/.*\.pb\.cc$
 ^configure\.win$
 ^python
 ^windows
