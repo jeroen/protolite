@@ -228,7 +228,7 @@ RawVector cpp_serialize_geobuf(List x, int decimals){
   Data message;
   message.set_precision(decimals);
   dim = 0;
-  multiplier = pow(10, decimals);
+  multiplier = pow(10.0, decimals);
   if(!x.containsElementNamed("type"))
     throw std::runtime_error("Data does not have 'type' element");
   std::string type = x["type"];
