@@ -1,3 +1,5 @@
-# This ensures a placeholder is shipped with CMD build.
-echo "#error This is a placeholder file." > src/rexp.pb.cc
-echo "#error This is a placeholder file." > src/geobuf.pb.cc
+#!/bin/bash
+#This ensures a placeholder is shipped with CMD build.
+for file in src/*.proto; do
+  echo "#error This is a placeholder file." > ${file%.proto}.pb.cc
+done
