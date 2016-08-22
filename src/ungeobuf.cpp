@@ -135,14 +135,14 @@ List append_prop(List x, uint32_t key, Value val){
     x[prop] = val.double_value();
   } else if(val.has_pos_int_value()){
     int64_t num = val.pos_int_value();
-    if(num < pow(2, 31)){
+    if(num < pow(2.0, 31)){
       x[prop] = int(num);
     } else {
       x[prop] = double(num);
     }
   } else if(val.has_neg_int_value()){
     int64_t num = val.neg_int_value();
-    if(num< pow(2, 31)){
+    if(num < pow(2.0, 31)){
       x[prop] = -1 * int(num);
     } else {
       x[prop] = -1 * double(num);
@@ -194,7 +194,7 @@ List ungeo(Feature x){
     out["id"] = x.id();
   } else if(x.has_int_id()){
     int64_t val = x.int_id();
-    out["id"] = val < pow(2, 31) ? int(val) : double(val);
+    out["id"] = val < pow(2.0, 31) ? int(val) : double(val);
   }
   if(x.properties_size()){
     List props;
@@ -229,7 +229,7 @@ List cpp_unserialize_geobuf(Rcpp::RawVector x){
   if(!message.ParseFromArray(x.begin(), x.size()))
     throw std::runtime_error("Failed to parse geobuf proto message");
   dim = message.dimensions();
-  multiplier = pow(10, message.precision());
+  multiplier = pow(10.0, message.precision());
   keys.clear();
   for(int i = 0; i < message.keys_size(); i++){
     keys.push_back(message.keys(i));
