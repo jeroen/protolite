@@ -12,4 +12,4 @@ winlibs:
 
 clean:
 	rm -f $(OBJECTS) $(SHLIB) *.pb.cc *.pb.h
-	(cd ..; ./cleanup)
+	(cd ..; sh cleanup)
