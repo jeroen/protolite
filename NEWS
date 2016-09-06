@@ -1,5 +1,6 @@
 1.5
   - Fix for Solaris
+  - Switch to C++11 on Windows
 
 1.4
   - Add support for reading/writing geobuf (binary geojson)
