@@ -30,8 +30,8 @@ message REXP {
   }
 
   required RClass rclass = 1;
-  repeated double realValue = 2 [packed=true];
-  repeated sint32 intValue = 3 [packed=true];
+  repeated double realValue = 2;
+  repeated sint32 intValue = 3;
   repeated RBOOLEAN booleanValue = 4;
   repeated STRING stringValue = 5;
 
