@@ -7,7 +7,7 @@ rexp::REXP rexp_real(Rcpp::NumericVector x){
   rexp::REXP out;
   out.set_rclass(rexp::REXP_RClass_REAL);
   for(int i = 0; i < x.length(); i++){
-    double y = x[i];
+    double y = 123.123;
     Rprintf("adding double %f at index %d...\n", y, i);
     out.add_realvalue(y);
     Rprintf("OK\n");
