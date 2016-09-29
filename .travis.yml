@@ -16,13 +16,13 @@ matrix:
       brew_packages: protobuf
       latex: false
     - os: osx
-      osx_image: xcode7.2
-      brew_packages: protobuf --devel
-      warnings_are_errors: false
+      osx_image: xcode8
+      disable_homebrew: true
       latex: false
     - os: osx
       osx_image: beta-xcode6.1
       disable_homebrew: true
+      latex: false
 
 addons:
   apt:
