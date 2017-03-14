@@ -2,12 +2,12 @@
 
 ##### *Fast and Simple Object Serialization to Protocol Buffers*
 
-[![Build Status](https://travis-ci.org/jeroenooms/protolite.svg?branch=master)](https://travis-ci.org/jeroenooms/protolite)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/jeroenooms/protolite?branch=master&svg=true)](https://ci.appveyor.com/project/jeroenooms/protolite)
-[![Coverage Status](https://codecov.io/github/jeroenooms/protolite/coverage.svg?branch=master)](https://codecov.io/github/jeroenooms/protolite?branch=master)
+[![Build Status](https://travis-ci.org/jeroen/protolite.svg?branch=master)](https://travis-ci.org/jeroen/protolite)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/jeroen/protolite?branch=master&svg=true)](https://ci.appveyor.com/project/jeroen/protolite)
+[![Coverage Status](https://codecov.io/github/jeroen/protolite/coverage.svg?branch=master)](https://codecov.io/github/jeroen/protolite?branch=master)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/protolite)](https://cran.r-project.org/package=protolite)
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/protolite)](https://cran.r-project.org/package=protolite)
-[![Github Stars](https://img.shields.io/github/stars/jeroenooms/protolite.svg?style=social&label=Github)](https://github.com/jeroenooms/protolite)
+[![Github Stars](https://img.shields.io/github/stars/jeroen/protolite.svg?style=social&label=Github)](https://github.com/jeroen/protolite)
 
 > Optimized, permissively licensed C++ implementations for reading
   and writing protocol-buffers. Currently supports rexp.proto for serializing
@@ -17,8 +17,8 @@
 
 ## RProtoBuf vs protolite
 
-This small package contains optimized C++ implementations for reading and writing protocol-buffers. Currently it supports [`rexp.proto`](https://github.com/jeroenooms/protolite/blob/master/src/rexp.proto) for serializing R objects and 
-[`geobuf.proto`](https://github.com/jeroenooms/protolite/blob/master/src/geobuf.proto) for geojson data. To extend the package with additional formats, put your `.proto` file in the `src` directory. The package configure script will automatically generate the code and header file to include in your C++ bindings.
+This small package contains optimized C++ implementations for reading and writing protocol-buffers. Currently it supports [`rexp.proto`](https://github.com/jeroen/protolite/blob/master/src/rexp.proto) for serializing R objects and 
+[`geobuf.proto`](https://github.com/jeroen/protolite/blob/master/src/geobuf.proto) for geojson data. To extend the package with additional formats, put your `.proto` file in the `src` directory. The package configure script will automatically generate the code and header file to include in your C++ bindings.
 
 The protolite package is much faster than RProtoBuf because it binds directly to [generated C++](https://developers.google.com/protocol-buffers/docs/reference/cpp-generated) code from the `protoc` compiler. RProtoBuf on the other hand uses the more flexible but slower reflection-based interface, which parses the descriptors at runtime. With RProtoBuf you can create new protocol buffers of a schema, read in arbitrary .proto files, manipulate fields, and generate / parse .prototext ascii format protocol buffers. For more details have a look at our paper: [*RProtoBuf: Efficient Cross-Language Data Serialization in R*](http://arxiv.org/abs/1401.7372).
 

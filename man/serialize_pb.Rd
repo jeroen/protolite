@@ -23,7 +23,7 @@ behavior is to fall back on base R \code{\link{serialize}} for non-data objects.
 }
 \description{
 Serializes R objects to a general purpose protobuf message. It uses the same
-\href{https://github.com/jeroenooms/protolite/blob/master/src/rexp.proto}{rexp.proto}
+\href{https://github.com/jeroen/protolite/blob/master/src/rexp.proto}{rexp.proto}
 descriptor and mapping between R objects and protobuf messages as RHIPE and the
 \link[RProtoBuf:serialize_pb]{RProtoBuf} package.
 }
