@@ -2,9 +2,9 @@
 % Please edit documentation in R/geobuf.R
 \name{geobuf}
 \alias{geobuf}
+\alias{read_geobuf}
 \alias{geobuf2json}
 \alias{json2geobuf}
-\alias{read_geobuf}
 \title{Geobuf}
 \usage{
 read_geobuf(x, as_data_frame = TRUE)
@@ -30,4 +30,3 @@ binary format for storing \code{geojson} data with protocol buffers. These
 functions are compatible with the \code{geobuf2json} and \code{json2geobuf}
 utilities from the geobuf \href{https://www.npmjs.com/package/geobuf}{npm package}.
 }
-
