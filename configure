@@ -40,9 +40,10 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     rm -Rf $BREWDIR
     mkdir -p $BREWDIR
     curl -fsSL https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C $BREWDIR
-    HOMEBREW_CACHE="/tmp" $BREWDIR/bin/brew install --force-bottle autoconf automake libtool 2>&1 | sed 's/Warning/Note/g'
-    HOMEBREW_CACHE="/tmp" $BREWDIR/bin/brew install $PKG_BREW_NAME 2>&1 | sed 's/Warning/Note/g'
-    DELDYN=TRUE
+    HOMEBREW_CACHE="/tmp" $BREWDIR/bin/brew install --force-bottle $PKG_BREW_NAME 2>&1 | sed 's/Warning/Note/g'
+
+    # 2017-03-15: there's a bug in protoc not finding dylibs
+    export DYLD_LIBRARY_PATH="$BREWDIR/opt/$PKG_BREW_NAME/lib"
   fi
   PATH="$BREWDIR/opt/$PKG_BREW_NAME/bin:$PATH"
   PKG_CFLAGS="-I$BREWDIR/opt/$PKG_BREW_NAME/include"
