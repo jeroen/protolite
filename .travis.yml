@@ -16,11 +16,11 @@ matrix:
       brew_packages: protobuf
       latex: false
     - os: osx
-      osx_image: xcode8
+      osx_image: xcode8.1
       disable_homebrew: true
       latex: false
     - os: osx
-      osx_image: beta-xcode6.1
+      osx_image: beta-xcode6.4
       disable_homebrew: true
       latex: false
 
