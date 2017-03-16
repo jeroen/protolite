@@ -4,8 +4,9 @@ PKG_CPPFLAGS= -I../windows/protobuf-3.2.0/include
 PKG_LIBS= -L../windows/protobuf-3.2.0/lib${subst gcc,,${COMPILED_BY}}${R_ARCH} \
 	-lprotobuf
 
-# CXX11 breaks gcc 4.6.3 (R 3.2.5)
+# CXX11 breaks gcc 4.6.3 (R 3.2.5). Temporary workaround:
 # CXX_STD=CXX11
+PKG_CXXFLAGS = -Wno-long-long
 
 all: clean winlibs
 
