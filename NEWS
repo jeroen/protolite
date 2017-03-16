@@ -1,3 +1,6 @@
+1.7
+  - Move autobrew script to external repo
+
 1.6
   - Update protobuf to 3.2.0 on Windows and OSX
 

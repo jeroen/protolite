@@ -35,16 +35,8 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   if [ $(command -v brew) ]; then
     BREWDIR=$(brew --prefix)
   else
-    echo "Auto-brewing $PKG_BREW_NAME..."
-    BREWDIR="$TMPDIR/homebrew"
-    rm -Rf $BREWDIR
-    mkdir -p $BREWDIR
-    curl -fsSL https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C $BREWDIR
-    HOMEBREW_CACHE="/tmp" $BREWDIR/bin/brew install --force-bottle $PKG_BREW_NAME 2>&1 | sed 's/Warning/Note/g'
-    DELDYN=TRUE
-
-    # 2017-03-15: there's a bug in protoc not finding dylibs
-    export DYLD_LIBRARY_PATH="$BREWDIR/opt/$PKG_BREW_NAME/lib"
+    curl -OL https://jeroen.github.io/autobrew/protobuf.sh
+    source protobuf.sh
   fi
   PATH="$BREWDIR/opt/$PKG_BREW_NAME/bin:$PATH"
   PKG_CFLAGS="-I$BREWDIR/opt/$PKG_BREW_NAME/include"
@@ -103,11 +95,6 @@ protoc *.proto --cpp_out=.
 if [ $? -ne 0 ]; then
   echo "Error: failed to compile proto files."
   exit 1
-fi
-
-# Delayed delete because dynlib is needed by protoc above
-if [ "$DELDYN" ]; then
-  rm -f $BREWDIR/opt/$PKG_BREW_NAME/lib/*.dylib
 fi
 
 # Success
