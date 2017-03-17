@@ -35,8 +35,8 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   if [ $(command -v brew) ]; then
     BREWDIR=$(brew --prefix)
   else
-    curl -OL https://jeroen.github.io/autobrew/protobuf.sh
-    source protobuf.sh
+    curl -sOL https://jeroen.github.io/autobrew/protobuf
+    source protobuf
   fi
   PATH="$BREWDIR/opt/$PKG_BREW_NAME/bin:$PATH"
   PKG_CFLAGS="-I$BREWDIR/opt/$PKG_BREW_NAME/include"
