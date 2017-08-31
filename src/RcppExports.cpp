@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 // cpp_serialize_geobuf
 RawVector cpp_serialize_geobuf(List x, int decimals);
-RcppExport SEXP protolite_cpp_serialize_geobuf(SEXP xSEXP, SEXP decimalsSEXP) {
+RcppExport SEXP _protolite_cpp_serialize_geobuf(SEXP xSEXP, SEXP decimalsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -19,7 +19,7 @@ END_RCPP
 }
 // cpp_serialize_pb
 Rcpp::RawVector cpp_serialize_pb(Rcpp::RObject x, bool skip_native);
-RcppExport SEXP protolite_cpp_serialize_pb(SEXP xSEXP, SEXP skip_nativeSEXP) {
+RcppExport SEXP _protolite_cpp_serialize_pb(SEXP xSEXP, SEXP skip_nativeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -31,7 +31,7 @@ END_RCPP
 }
 // cpp_unserialize_geobuf
 List cpp_unserialize_geobuf(Rcpp::RawVector x);
-RcppExport SEXP protolite_cpp_unserialize_geobuf(SEXP xSEXP) {
+RcppExport SEXP _protolite_cpp_unserialize_geobuf(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -42,7 +42,7 @@ END_RCPP
 }
 // cpp_unserialize_pb
 Rcpp::RObject cpp_unserialize_pb(Rcpp::RawVector x);
-RcppExport SEXP protolite_cpp_unserialize_pb(SEXP xSEXP) {
+RcppExport SEXP _protolite_cpp_unserialize_pb(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;

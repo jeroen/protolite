@@ -2,18 +2,18 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 cpp_serialize_geobuf <- function(x, decimals) {
-    .Call('protolite_cpp_serialize_geobuf', PACKAGE = 'protolite', x, decimals)
+    .Call('_protolite_cpp_serialize_geobuf', PACKAGE = 'protolite', x, decimals)
 }
 
 cpp_serialize_pb <- function(x, skip_native) {
-    .Call('protolite_cpp_serialize_pb', PACKAGE = 'protolite', x, skip_native)
+    .Call('_protolite_cpp_serialize_pb', PACKAGE = 'protolite', x, skip_native)
 }
 
 cpp_unserialize_geobuf <- function(x) {
-    .Call('protolite_cpp_unserialize_geobuf', PACKAGE = 'protolite', x)
+    .Call('_protolite_cpp_unserialize_geobuf', PACKAGE = 'protolite', x)
 }
 
 cpp_unserialize_pb <- function(x) {
-    .Call('protolite_cpp_unserialize_pb', PACKAGE = 'protolite', x)
+    .Call('_protolite_cpp_unserialize_pb', PACKAGE = 'protolite', x)
 }
 
