@@ -5,6 +5,10 @@ cpp_serialize_geobuf <- function(x, decimals) {
     .Call('_protolite_cpp_serialize_geobuf', PACKAGE = 'protolite', x, decimals)
 }
 
+R_start_protobuf <- function() {
+    invisible(.Call('_protolite_R_start_protobuf', PACKAGE = 'protolite'))
+}
+
 cpp_serialize_pb <- function(x, skip_native) {
     .Call('_protolite_cpp_serialize_pb', PACKAGE = 'protolite', x, skip_native)
 }
