@@ -1,3 +1,6 @@
+1.8
+  - Update to protobuf v3.5.1 on Windows
+
 1.7
   - Move autobrew script to external repo
   - Use Rcpp symbol registration and visibility
