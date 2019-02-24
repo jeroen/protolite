@@ -10,6 +10,7 @@ endif
 
 PKG_CPPFLAGS= -I$(RWINLIB)/include
 PKG_LIBS= -L$(RWINLIB)/lib${subst gcc,,${COMPILED_BY}}${R_ARCH} \
+	-L$(IMPATH)/lib${R_ARCH} \
 	-lprotobuf
 
 # CXX11 breaks gcc 4.6.3 (R 3.2.5). Temporary workaround:
