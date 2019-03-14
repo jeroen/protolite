@@ -1,3 +1,5 @@
+// [[Rcpp::interfaces(r, cpp)]]
+
 #include "rexp.pb.h"
 #include <Rcpp.h>
 

@@ -1,3 +1,5 @@
+// [[Rcpp::interfaces(r, cpp)]]
+
 #include "geobuf.pb.h"
 #include <Rcpp.h>
 

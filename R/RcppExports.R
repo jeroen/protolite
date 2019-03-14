@@ -21,3 +21,7 @@ cpp_unserialize_pb <- function(x) {
     .Call('_protolite_cpp_unserialize_pb', PACKAGE = 'protolite', x)
 }
 
+# Register entry points for exported C++ functions
+methods::setLoadAction(function(ns) {
+    .Call('_protolite_RcppExport_registerCCallable', PACKAGE = 'protolite')
+})
