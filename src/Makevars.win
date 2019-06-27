@@ -1,20 +1,13 @@
 # ProtoBuf Version
-VERSION = 3.5.1
+VERSION = 3.8.0
 RWINLIB = ../windows/protobuf-${VERSION}
-
-# Support old toolchain
-COMPILED_BY ?= gcc-4.6.3
-ifeq ($(R_COMPILED_BY),-4.6.3)
-VERSION = 3.2.0
-endif
 
 PKG_CPPFLAGS= -I$(RWINLIB)/include
 PKG_LIBS= -L$(RWINLIB)/lib${subst gcc,,${COMPILED_BY}}${R_ARCH} \
-	-L$(IMPATH)/lib${R_ARCH} \
+	-L$(RWINLIB)/lib${R_ARCH} \
 	-lprotobuf
 
-# CXX11 breaks gcc 4.6.3 (R 3.2.5). Temporary workaround:
-# CXX_STD=CXX11
+CXX_STD=CXX11
 PKG_CXXFLAGS = -Wno-long-long
 
 all: clean winlibs
