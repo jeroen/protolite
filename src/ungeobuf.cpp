@@ -87,7 +87,7 @@ List build_four(Geometry x){
       List coordinates;
       size_t groups = x.lengths(++cursor);
       for (size_t i = 0; i < groups; i++){
-        size_t groupsize = x.lengths(++cursor);
+        R_xlen_t groupsize = x.lengths(++cursor);
         Rcpp::List group;
         std::vector<double> vec(dim);
         for (size_t j = 0; j < groupsize; j++){
