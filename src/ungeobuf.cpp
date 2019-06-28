@@ -90,7 +90,7 @@ List build_four(Geometry x){
         R_xlen_t groupsize = x.lengths(++cursor);
         Rcpp::List group;
         std::vector<double> vec(dim);
-        for (size_t j = 0; j < groupsize; j++){
+        for (R_xlen_t j = 0; j < groupsize; j++){
           for (size_t k = 0; k < dim; k++){
             vec[k] += x.coords((offset + j) * dim + k) / multiplier;
           }
