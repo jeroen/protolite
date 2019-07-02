@@ -7,3 +7,4 @@
 ^configure\.win$
 ^python
 ^windows
+^README.md$
