@@ -11,8 +11,8 @@
 #' @param x file path or raw vector with the serialized \code{geobuf.proto} message
 #' @param as_data_frame simplify geojson data into data frames
 read_geobuf <- function(x, as_data_frame = TRUE){
-  if(is.character(x) && file.exists(x)){
-    x <- readBin(x, raw(), file.info(x)$size)
+  if(is.character(x)){
+    x <- readBin(normalizePath(x, mustWork = TRUE), raw(), file.info(x)$size)
   }
   stopifnot(is.raw(x))
   data <- cpp_unserialize_geobuf(x)

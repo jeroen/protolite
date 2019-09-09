@@ -3,6 +3,7 @@
 export(geobuf2json)
 export(json2geobuf)
 export(read_geobuf)
+export(read_mvt)
 export(serialize_pb)
 export(unserialize_pb)
 importFrom(Rcpp,sourceCpp)

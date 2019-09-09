@@ -49,6 +49,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_unserialize_mvt
+Rcpp::List cpp_unserialize_mvt(Rcpp::RawVector x);
+RcppExport SEXP _protolite_cpp_unserialize_mvt(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::RawVector >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_unserialize_mvt(x));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_unserialize_pb
 Rcpp::RObject cpp_unserialize_pb(Rcpp::RawVector x);
 RcppExport SEXP _protolite_cpp_unserialize_pb(SEXP xSEXP) {
@@ -66,6 +77,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_protolite_R_start_protobuf", (DL_FUNC) &_protolite_R_start_protobuf, 0},
     {"_protolite_cpp_serialize_pb", (DL_FUNC) &_protolite_cpp_serialize_pb, 2},
     {"_protolite_cpp_unserialize_geobuf", (DL_FUNC) &_protolite_cpp_unserialize_geobuf, 1},
+    {"_protolite_cpp_unserialize_mvt", (DL_FUNC) &_protolite_cpp_unserialize_mvt, 1},
     {"_protolite_cpp_unserialize_pb", (DL_FUNC) &_protolite_cpp_unserialize_pb, 1},
     {NULL, NULL, 0}
 };
