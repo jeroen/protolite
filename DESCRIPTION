@@ -15,5 +15,5 @@ BugReports: https://github.com/jeroen/protolite/issues
 SystemRequirements: libprotobuf and protobuf-compiler
 LinkingTo: Rcpp
 Imports: Rcpp (>= 0.12.12), jsonlite
-Suggests: testthat, RProtoBuf
+Suggests: testthat, RProtoBuf, sf
 RoxygenNote: 6.1.1

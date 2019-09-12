@@ -2,10 +2,13 @@
 % Please edit documentation in R/mapbox.R
 \name{mapbox}
 \alias{mapbox}
-\alias{read_mvt}
+\alias{read_mvt_data}
+\alias{read_mvt_sf}
 \title{Mapbox Vector Tiles}
 \usage{
-read_mvt(x)
+read_mvt_data(x)
+
+read_mvt_sf(x)
 }
 \arguments{
 \item{x}{file path or raw vector with the mvt file}

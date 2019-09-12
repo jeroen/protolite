@@ -106,6 +106,7 @@ List unmapbox(Layer layer){
   for(int i = 0; i < n_keys; i++){
     keys.at(i) = layer.keys(i);
   }
+  out["keys"] = keys;
 
   // Values (objects)
   int n_values = layer.values_size();
