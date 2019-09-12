@@ -10,6 +10,55 @@ typedef Tile::Layer Layer;
 typedef Rcpp::List List;
 typedef Rcpp::NumericVector NumericVector;
 
+#define MoveTo 1
+#define LineTo 2
+#define ClosePath 7
+
+#define cmd_command(CommandInteger) (CommandInteger & 0x7)
+#define cmd_count(CommandInteger) (CommandInteger >> 3)
+
+static Rcpp::IntegerMatrix decode_geometry(std::vector<int> geom){
+  int x = 0;
+  int y = 0;
+  int g = 0;
+  int x0 = 0;
+  int y0 = 0;
+  std::vector<int> xvec;
+  std::vector<int> yvec;
+  std::vector<int> gvec;
+  for(int i = 0; i < geom.size(); i++){
+    int cmd = cmd_command(geom.at(i));
+    int count = cmd_count(geom.at(i));
+    REprintf("Command: %d with count %d\n", cmd, count);
+    if(cmd == LineTo || cmd == MoveTo){
+      for(int j = 0; j < count; j++){
+        x = x + geom.at(++i);
+        y = y + geom.at(++i);
+        xvec.push_back(x);
+        yvec.push_back(y);
+        if(cmd == MoveTo){
+          g++;
+          x0 = x;
+          y0 = y;
+        }
+        gvec.push_back(g);
+      }
+    } else if(cmd == ClosePath){
+      xvec.push_back(x0);
+      yvec.push_back(y0);
+      gvec.push_back(g);
+    }
+  }
+  int len = xvec.size();
+  Rcpp::IntegerMatrix mat(len, 3);
+  for(int i = 0; i < len; i++){
+    mat.at(i, 0) = xvec.at(i);
+    mat.at(i, 1) = yvec.at(i);
+    mat.at(i, 2) = gvec.at(i);
+  }
+  return mat;
+}
+
 List unmapbox(Feature feature, Rcpp::CharacterVector all_keys, Rcpp::List all_values){
   List out;
   out["id"] = feature.id();
@@ -27,11 +76,11 @@ List unmapbox(Feature feature, Rcpp::CharacterVector all_keys, Rcpp::List all_va
   out["attributes"] = attributes;
 
   int n_geometry = feature.geometry_size();
-  Rcpp::IntegerVector geometry(n_geometry);
+  std::vector<int> geometry(n_geometry);
   for(int i = 0; i < n_geometry; i++){
     geometry[i] = feature.geometry(i);
   }
-  out["geometry"] = geometry;
+  out["geometry"] = decode_geometry(geometry);
   return out;
 }
 
