@@ -17,6 +17,16 @@ typedef Rcpp::NumericVector NumericVector;
 #define cmd_command(CommandInteger) (CommandInteger & 0x7)
 #define cmd_count(CommandInteger) (CommandInteger >> 3)
 
+static std::string type2string(Tile::GeomType x){
+  switch(x){
+  case Tile::POINT: return "POINT";
+  case Tile::LINESTRING: return "LINESTRING";
+  case Tile::POLYGON: return "POLYGON";
+  case Tile::UNKNOWN: return "UNKNOWN";
+  }
+  throw std::runtime_error("switch fall through");
+}
+
 static Rcpp::IntegerMatrix decode_geometry(std::vector<int> geom){
   int x = 0;
   int y = 0;
@@ -29,7 +39,7 @@ static Rcpp::IntegerMatrix decode_geometry(std::vector<int> geom){
   for(int i = 0; i < geom.size(); i++){
     int cmd = cmd_command(geom.at(i));
     int count = cmd_count(geom.at(i));
-    REprintf("Command: %d with count %d\n", cmd, count);
+    //REprintf("Command: %d with count %d\n", cmd, count);
     if(cmd == LineTo || cmd == MoveTo){
       for(int j = 0; j < count; j++){
         x = x + geom.at(++i);
@@ -62,7 +72,7 @@ static Rcpp::IntegerMatrix decode_geometry(std::vector<int> geom){
 List unmapbox(Feature feature, Rcpp::CharacterVector all_keys, Rcpp::List all_values){
   List out;
   out["id"] = feature.id();
-  out["type"] = int(feature.type());
+  out["type"] = type2string(feature.type());
   int n_attrib = feature.tags_size() / 2;
   Rcpp::CharacterVector names(n_attrib);
   Rcpp::List attributes(n_attrib);
