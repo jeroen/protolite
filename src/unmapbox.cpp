@@ -44,8 +44,8 @@ static Rcpp::IntegerMatrix decode_geometry(std::vector<int> geom){
       for(int j = 0; j < count; j++){
         int px = geom.at(++i);
         int py = geom.at(++i);
-        x = x + ((px >> 1) ^ (-(px & 1)));
-        y = y + ((py >> 1) ^ (-(py & 1)));
+        x += ((px >> 1) ^ (-(px & 1)));
+        y += ((py >> 1) ^ (-(py & 1)));
         xvec.push_back(x);
         yvec.push_back(y);
         if(cmd == MoveTo){
