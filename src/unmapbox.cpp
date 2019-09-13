@@ -42,8 +42,10 @@ static Rcpp::IntegerMatrix decode_geometry(std::vector<int> geom){
     //REprintf("Command: %d with count %d\n", cmd, count);
     if(cmd == LineTo || cmd == MoveTo){
       for(int j = 0; j < count; j++){
-        x = x + geom.at(++i);
-        y = y + geom.at(++i);
+        int px = geom.at(++i);
+        int py = geom.at(++i);
+        x = x + ((px >> 1) ^ (-(px & 1)));
+        y = y + ((py >> 1) ^ (-(py & 1)));
         xvec.push_back(x);
         yvec.push_back(y);
         if(cmd == MoveTo){
