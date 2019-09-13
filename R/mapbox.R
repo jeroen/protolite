@@ -21,7 +21,7 @@ read_mvt_data <- function(x){
 read_mvt_sf <- function(x){
   layers <- read_mvt_data(x)
   collections <- lapply(layers, function(layer){
-    g <- sf::st_sfc(lapply(layer$features, function(feature){
+    geometry <- sf::st_sfc(lapply(layer$features, function(feature){
       switch(feature$type,
              POINT = mvt_sf_point(feature$geometry),
              LINESTRING = mvt_sf_linestring(feature$geometry),
@@ -31,7 +31,7 @@ read_mvt_sf <- function(x){
       )
     }))
     if(!length(layer$keys)){
-      sf::st_sf(g)
+      sf::st_sf(geometry)
     } else {
       df <- lapply(layer$keys, function(key){
         sapply(layer$features, function(feature){
@@ -40,7 +40,7 @@ read_mvt_sf <- function(x){
         })
       })
       names(df) <- layer$keys
-      sf::st_sf(df, g)
+      sf::st_sf(df, geometry)
     }
   })
   layer_names <- sapply(layers, `[[`, 'name')
