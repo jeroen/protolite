@@ -27,14 +27,14 @@ static std::string type2string(Tile::GeomType x){
   throw std::runtime_error("switch fall through");
 }
 
-static Rcpp::IntegerMatrix decode_geometry(std::vector<int> geom){
+static Rcpp::NumericMatrix decode_geometry(std::vector<int> geom, double extent){
   int x = 0;
   int y = 0;
   int g = 0;
   int x0 = 0;
   int y0 = 0;
-  std::vector<int> xvec;
-  std::vector<int> yvec;
+  std::vector<double> xvec;
+  std::vector<double> yvec;
   std::vector<int> gvec;
   for(int i = 0; i < geom.size(); i++){
     int cmd = cmd_command(geom.at(i));
@@ -46,8 +46,8 @@ static Rcpp::IntegerMatrix decode_geometry(std::vector<int> geom){
         int py = geom.at(++i);
         x += ((px >> 1) ^ (-(px & 1)));
         y += ((py >> 1) ^ (-(py & 1)));
-        xvec.push_back(x);
-        yvec.push_back(y);
+        xvec.push_back(x / extent);
+        yvec.push_back(y / extent);
         if(cmd == MoveTo){
           g++;
           x0 = x;
@@ -62,7 +62,7 @@ static Rcpp::IntegerMatrix decode_geometry(std::vector<int> geom){
     }
   }
   int len = xvec.size();
-  Rcpp::IntegerMatrix mat(len, 3);
+  Rcpp::NumericMatrix mat(len, 3);
   for(int i = 0; i < len; i++){
     mat.at(i, 0) = xvec.at(i);
     mat.at(i, 1) = yvec.at(i);
@@ -71,7 +71,7 @@ static Rcpp::IntegerMatrix decode_geometry(std::vector<int> geom){
   return mat;
 }
 
-List unmapbox(Feature feature, Rcpp::CharacterVector all_keys, Rcpp::List all_values){
+List unmapbox(Feature feature, Rcpp::CharacterVector all_keys, Rcpp::List all_values, double extent){
   List out;
   out["id"] = feature.id();
   out["type"] = type2string(feature.type());
@@ -92,7 +92,7 @@ List unmapbox(Feature feature, Rcpp::CharacterVector all_keys, Rcpp::List all_va
   for(int i = 0; i < n_geometry; i++){
     geometry[i] = feature.geometry(i);
   }
-  out["geometry"] = decode_geometry(geometry);
+  out["geometry"] = decode_geometry(geometry, extent);
   return out;
 }
 
@@ -136,7 +136,7 @@ List unmapbox(Layer layer){
   int n_features = layer.features_size();
   Rcpp::List features(n_features);
   for(int i = 0; i < n_features; i++){
-    features.at(i) = unmapbox(layer.features(i), keys, values);
+    features.at(i) = unmapbox(layer.features(i), keys, values, layer.extent());
   }
   out["features"] = features;
   return out;
