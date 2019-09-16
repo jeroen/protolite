@@ -6,12 +6,16 @@
 \alias{read_mvt_sf}
 \title{Mapbox Vector Tiles}
 \usage{
-read_mvt_data(x)
+read_mvt_data(data, zxy = NULL)
 
-read_mvt_sf(x)
+read_mvt_sf(data)
 }
 \arguments{
-\item{x}{file path or raw vector with the mvt file}
+\item{data}{url, path or raw vector with the mvt data}
+
+\item{zxy}{vector of length 3 with respsectively z (zoom), x (column) and y (row).
+For file/url in the standard `../{z}/{x}/{y}.mvt` format, these are automatically
+inferred from the input path.}
 }
 \description{
 Read Mapbox vector-tile (mvt) files and returns the list of layers.
