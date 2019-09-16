@@ -4,7 +4,6 @@
 
 [![Build Status](https://travis-ci.org/jeroen/protolite.svg?branch=master)](https://travis-ci.org/jeroen/protolite)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/jeroen/protolite?branch=master&svg=true)](https://ci.appveyor.com/project/jeroen/protolite)
-[![Coverage Status](https://codecov.io/github/jeroen/protolite/coverage.svg?branch=master)](https://codecov.io/github/jeroen/protolite?branch=master)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/protolite)](https://cran.r-project.org/package=protolite)
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/protolite)](https://cran.r-project.org/package=protolite)
 [![Github Stars](https://img.shields.io/github/stars/jeroen/protolite.svg?style=social&label=Github)](https://github.com/jeroen/protolite)
