@@ -49,8 +49,8 @@ parse_mvt_params <- function(url){
 
 #' @export
 #' @rdname mapbox
-read_mvt_sf <- function(data){
-  layers <- read_mvt_data(data)
+read_mvt_sf <- function(data, zxy = NULL){
+  layers <- read_mvt_data(data, zxy = zxy)
   collections <- lapply(layers, function(layer){
     geometry <- sf::st_sfc(lapply(layer$features, function(feature){
       switch(feature$type,

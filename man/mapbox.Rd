@@ -8,7 +8,7 @@
 \usage{
 read_mvt_data(data, zxy = NULL)
 
-read_mvt_sf(data)
+read_mvt_sf(data, zxy = NULL)
 }
 \arguments{
 \item{data}{url, path or raw vector with the mvt data}
