@@ -17,7 +17,9 @@ SystemRequirements: libprotobuf and protobuf-compiler
 LinkingTo: Rcpp
 Imports: Rcpp (>= 0.12.12), 
     jsonlite
-Suggests: testthat, 
+Suggests: 
+    curl,
+    testthat, 
     RProtoBuf, 
     sf
 RoxygenNote: 6.1.1
