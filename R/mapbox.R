@@ -60,9 +60,9 @@ read_mvt_sf <- function(data, zxy = NULL){
              UNKNOWN = feature$geometry,
              stop("Unknown type:", feature$type)
       )
-    }))
+    }), crs = 4326)
     if(!length(layer$keys)){
-      sf::st_sf(geometry, crs = 3857)
+      sf::st_sf(geometry, crs = 4326)
     } else {
       df <- lapply(layer$keys, function(key){
         sapply(layer$features, function(feature){
@@ -71,7 +71,7 @@ read_mvt_sf <- function(data, zxy = NULL){
         })
       })
       names(df) <- layer$keys
-      sf::st_sf(df, geometry, crs = 3857)
+      sf::st_sf(df, geometry, crs = 4326)
     }
   })
   layer_names <- sapply(layers, `[[`, 'name')
