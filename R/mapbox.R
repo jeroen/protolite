@@ -32,8 +32,8 @@ read_mvt_data <- function(data, as_latlon = TRUE, zxy = NULL){
         feature$geometry[,1] <- x_to_lon((x + feature$geometry[,1]) / 2^z)
         feature$geometry[,2] <- y_to_lat((y + feature$geometry[,2]) / 2^z)
       } else {
-        feature$geometry[,1] <- x_to_wsg((x + feature$geometry[,1]) / 2^z)
-        feature$geometry[,2] <- y_to_wsg((y + feature$geometry[,2]) / 2^z)
+        feature$geometry[,1] <- scale_wsg((x + feature$geometry[,1]) / 2^z)
+        feature$geometry[,2] <- -1 * scale_wsg((y + feature$geometry[,2]) / 2^z)
       }
       return(feature)
     })
@@ -123,10 +123,6 @@ y_to_lat <- function(y){
 
 MAXEXTENT <- 20037508.342789244;
 
-x_to_wsg <- function(x){
+scale_wsg <- function(x){
   x * (2 * MAXEXTENT) - MAXEXTENT
-}
-
-y_to_wsg <- function(y){
-  -y * (2 * MAXEXTENT) + MAXEXTENT
 }
