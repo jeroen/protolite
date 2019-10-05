@@ -6,16 +6,20 @@
 \alias{read_mvt_sf}
 \title{Mapbox Vector Tiles}
 \usage{
-read_mvt_data(data, zxy = NULL)
+read_mvt_data(data, as_latlon = TRUE, zxy = NULL)
 
-read_mvt_sf(data, zxy = NULL)
+read_mvt_sf(data, zxy = NULL, crs = 4326)
 }
 \arguments{
 \item{data}{url, path or raw vector with the mvt data}
 
+\item{as_latlon}{return the data as lat/lon instead of raw EPSG:3857 positions}
+
 \item{zxy}{vector of length 3 with respsectively z (zoom), x (column) and y (row).
-For file/url in the standard `../{z}/{x}/{y}.mvt` format, these are automatically
+For file/url in the standard \verb{../\{z\}/\{x\}/\{y\}.mvt} format, these are automatically
 inferred from the input path.}
+
+\item{crs}{output coordinates, see \link[sf:st_transform]{sf::st_transform}}
 }
 \description{
 Read Mapbox vector-tile (mvt) files and returns the list of layers.

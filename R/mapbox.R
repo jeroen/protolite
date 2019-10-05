@@ -5,12 +5,12 @@
 #' @export
 #' @name mapbox
 #' @rdname mapbox
-#' @name mapbox
 #' @param data url, path or raw vector with the mvt data
 #' @param zxy vector of length 3 with respsectively z (zoom), x (column) and y (row).
 #' For file/url in the standard `../{z}/{x}/{y}.mvt` format, these are automatically
 #' inferred from the input path.
-read_mvt_data <- function(data, zxy = NULL){
+#' @param as_latlon return the data as lat/lon instead of raw EPSG:3857 positions
+read_mvt_data <- function(data, as_latlon = TRUE, zxy = NULL){
   if(!is.numeric(zxy) || length(zxy) != 3){
     zxy <- parse_mvt_params(data)
   }
@@ -28,8 +28,13 @@ read_mvt_data <- function(data, zxy = NULL){
   layers <- cpp_unserialize_mvt(data)
   lapply(layers, function(layer){
     layer$features <- lapply(layer$features, function(feature){
-      feature$geometry[,1] <- x_to_lon((x + feature$geometry[,1]) / 2^z)
-      feature$geometry[,2] <- y_to_lat((y + feature$geometry[,2]) / 2^z)
+      if(isTRUE(as_latlon)){
+        feature$geometry[,1] <- x_to_lon((x + feature$geometry[,1]) / 2^z)
+        feature$geometry[,2] <- y_to_lat((y + feature$geometry[,2]) / 2^z)
+      } else {
+        feature$geometry[,1] <- x_to_wsg((x + feature$geometry[,1]) / 2^z)
+        feature$geometry[,2] <- y_to_wsg((y + feature$geometry[,2]) / 2^z)
+      }
       return(feature)
     })
     return(layer)
@@ -49,8 +54,9 @@ parse_mvt_params <- function(url){
 
 #' @export
 #' @rdname mapbox
-read_mvt_sf <- function(data, zxy = NULL){
-  layers <- read_mvt_data(data, zxy = zxy)
+#' @param crs output coordinates, see [sf::st_transform]
+read_mvt_sf <- function(data, zxy = NULL, crs = 4326){
+  layers <- read_mvt_data(data, zxy = zxy, as_latlon = FALSE)
   collections <- lapply(layers, function(layer){
     geometry <- sf::st_sfc(lapply(layer$features, function(feature){
       switch(feature$type,
@@ -60,9 +66,9 @@ read_mvt_sf <- function(data, zxy = NULL){
              UNKNOWN = feature$geometry,
              stop("Unknown type:", feature$type)
       )
-    }), crs = 4326)
-    if(!length(layer$keys)){
-      sf::st_sf(geometry, crs = 4326)
+    }), crs = 3857)
+    out <- if(!length(layer$keys)){
+      sf::st_sf(geometry, crs = 3857)
     } else {
       df <- lapply(layer$keys, function(key){
         sapply(layer$features, function(feature){
@@ -71,8 +77,9 @@ read_mvt_sf <- function(data, zxy = NULL){
         })
       })
       names(df) <- layer$keys
-      sf::st_sf(df, geometry, crs = 4326)
+      sf::st_sf(df, geometry, crs = 3857)
     }
+    sf::st_transform(out, crs = crs)
   })
   layer_names <- sapply(layers, `[[`, 'name')
   if(length(layer_names) == length(collections))
@@ -112,4 +119,14 @@ x_to_lon <- function(x){
 
 y_to_lat <- function(y){
   atan(sinh(pi - y * 2*pi)) * (180/pi)
+}
+
+MAXEXTENT <- 20037508.342789244;
+
+x_to_wsg <- function(x){
+  x * (2 * MAXEXTENT) - MAXEXTENT
+}
+
+y_to_wsg <- function(y){
+  -y * (2 * MAXEXTENT) + MAXEXTENT
 }
