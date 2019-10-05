@@ -55,7 +55,7 @@ parse_mvt_params <- function(url){
 #' @export
 #' @rdname mapbox
 #' @param crs output coordinates, see [sf::st_transform]
-read_mvt_sf <- function(data, zxy = NULL, crs = 4326){
+read_mvt_sf <- function(data, crs = 4326, zxy = NULL){
   layers <- read_mvt_data(data, zxy = zxy, as_latlon = FALSE)
   collections <- lapply(layers, function(layer){
     geometry <- sf::st_sfc(lapply(layer$features, function(feature){
