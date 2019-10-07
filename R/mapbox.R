@@ -54,7 +54,8 @@ parse_mvt_params <- function(url){
 
 #' @export
 #' @rdname mapbox
-#' @param crs output coordinates, see [sf::st_transform]
+#' @param crs desired output coordinate system (passed to [sf::st_transform]).
+#' Note that mvt input is always by definition 3857.
 read_mvt_sf <- function(data, crs = 4326, zxy = NULL){
   layers <- read_mvt_data(data, zxy = zxy, as_latlon = FALSE)
   collections <- lapply(layers, function(layer){

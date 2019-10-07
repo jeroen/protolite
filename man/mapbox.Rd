@@ -19,7 +19,8 @@ read_mvt_sf(data, crs = 4326, zxy = NULL)
 For file/url in the standard \verb{../\{z\}/\{x\}/\{y\}.mvt} format, these are automatically
 inferred from the input path.}
 
-\item{crs}{output coordinates, see \link[sf:st_transform]{sf::st_transform}}
+\item{crs}{desired output coordinate system (passed to \link[sf:st_transform]{sf::st_transform}).
+Note that mvt input is always by definition 3857.}
 }
 \description{
 Read Mapbox vector-tile (mvt) files and returns the list of layers.
