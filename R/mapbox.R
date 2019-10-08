@@ -42,7 +42,7 @@ read_mvt_data <- function(data, as_latlon = TRUE, zxy = NULL){
 }
 
 parse_mvt_params <- function(url){
-  regex <- "^.*[-/]([0-9]+)[-/]([0-9]+)[-/]([0-9]+).\\w+([?#].*)?$"
+  regex <- "^.*[-/]([0-9]+)[-/]([0-9]+)[-/]([0-9]+).[a-zA-Z0-9.]+([?#].*)?$"
   if(!is.character(url) || !length(url) || !grepl(regex, url)){
     stop("Input path does have standard /{z}/{x}/{y}.mvt format so you must provide zxy parameters manually")
   }
@@ -106,8 +106,16 @@ mvt_sf_linestring <- function(mat){
 
 #FIXME: calculate winding order to detect MULTIPOLYGONS
 mvt_sf_polygon <- function(mat){
-  # if(!all_equal(mat[,3])) browser()
-  sf::st_polygon(split_matrix_groups(mat))
+  data <- split_matrix_groups(mat)
+  isnew <- vapply(data, function(X){
+    poly_dir(X[,1], X[,2]) == 1
+  }, logical(1))
+  group <- cumsum(isnew)
+  if(all_equal(group)){
+    sf::st_polygon(data)
+  } else {
+    sf::st_multipolygon(unname(split(data, group)))
+  }
 }
 
 all_equal <- function(x){
@@ -131,4 +139,10 @@ MAXEXTENT <- 20037508.342789244;
 
 scale_wsg <- function(x){
   x * (2 * MAXEXTENT) - MAXEXTENT
+}
+
+poly_dir <- function(x, y) {
+  xdiff <- c(x[-1], x[1]) - x
+  ysum <- c(y[-1], y[1]) + y
+  sign(sum(xdiff * ysum))
 }
