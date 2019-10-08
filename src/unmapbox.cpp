@@ -56,8 +56,8 @@ static Rcpp::NumericMatrix decode_geometry(std::vector<int> geom, double extent)
         gvec.push_back(g);
       }
     } else if(cmd == ClosePath){
-      xvec.push_back(x0);
-      yvec.push_back(y0);
+      xvec.push_back(x0/ extent);
+      yvec.push_back(y0/ extent);
       gvec.push_back(g);
     }
   }
