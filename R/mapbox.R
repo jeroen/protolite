@@ -97,7 +97,7 @@ mvt_sf_point <- function(mat){
 }
 
 mvt_sf_linestring <- function(mat){
-  if(length(unique(mat[,3])) == 1){
+  if(all_equal(mat[,3])){
     sf::st_linestring(mat[,1:2])
   } else {
     sf::st_multilinestring(split_matrix_groups(mat))
@@ -106,7 +106,12 @@ mvt_sf_linestring <- function(mat){
 
 #FIXME: calculate winding order to detect MULTIPOLYGONS
 mvt_sf_polygon <- function(mat){
+  # if(!all_equal(mat[,3])) browser()
   sf::st_polygon(split_matrix_groups(mat))
+}
+
+all_equal <- function(x){
+  length(unique(x)) == 1L
 }
 
 split_matrix_groups <- function(mat){
