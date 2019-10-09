@@ -2,7 +2,7 @@ context('MapBox Vector Tiles')
 
 test_that("Read multipolygon", {
   # Original GeoJSON data
-  campus <- sf::read_sf('../testdata/campus.geojson', quiet = TRUE)
+  campus <- sf::read_sf('../testdata/campus.geojson', quiet = TRUE, as_tibble = FALSE)
 
   # Converted to MVT
   mvt10 = read_mvt_sf('../testdata/tiles/10/213/388.mvt')

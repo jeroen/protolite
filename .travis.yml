@@ -28,5 +28,3 @@ addons:
       - libprotoc-dev
       - libgdal-dev
       - libudunits2-dev
-
-r_packages: tibble
