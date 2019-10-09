@@ -28,3 +28,5 @@ addons:
       - protobuf-compiler
       - libgdal-dev
       - libudunits2-dev
+
+r_packages: tibble
