@@ -5,8 +5,8 @@ test_that("Read multipolygon", {
   campus <- sf::read_sf('../testdata/campus.geojson', quiet = TRUE, as_tibble = FALSE)
 
   # Converted to MVT
-  mvt10 = read_mvt_sf('../testdata/tiles/10/213/388.mvt')
-  mvt12 = read_mvt_sf('../testdata/tiles/12/853/1554.mvt')
+  mvt10 = read_mvt_sf('../testdata/campus/10/213/388.mvt')
+  mvt12 = read_mvt_sf('../testdata/campus/12/853/1554.mvt')
 
   # Attributes
   style <- jsonlite::fromJSON(as.character(campus$style))
@@ -25,4 +25,6 @@ test_that("Read multipolygon", {
   # Compare geometry data (zoom reduces accuracy)
   expect_equal(sf::st_area(out1), sf::st_area(out2), tol = 1e-2)
   expect_equal(sf::st_area(out1), sf::st_area(out3), tol = 1e-2)
+
+
 })
