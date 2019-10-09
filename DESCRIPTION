@@ -1,17 +1,19 @@
 Package: protolite
 Type: Package
-Title: Fast and Simple Object Serialization to Protocol Buffers
+Title: Highly Optimized Protocol Buffer Serializers
 Author: Jeroen Ooms
 Maintainer: Jeroen Ooms <jeroen@berkeley.edu>
-Description: Optimized C++ implementations for reading and writing common protocol-buffers
-    formats. Currently supports 'rexp.proto' for serializing R objects, 'geobuf.proto' for 
-    binary geojson, and 'mvt.proto' for "Mapbox vector tiles". This package uses auto-generated 
-    C++ interfaces from protobuf-compiler, hence the entire serialization is highly optimized. 
-    The 'RProtoBuf' package on the other hand provides a general-purpose toolkit for 
-    working with arbitrary protocol-buffers in R.
+Description: Pure C++ implementations for reading and writing several common data 
+    formats based on Google protocol-buffers. Currently supports 'rexp.proto' for 
+    R objects, 'geobuf.proto' for binary geojson, and 'mvt.proto' for vector tiles. 
+    This package uses the auto-generated C++ code by protobuf-compiler, hence the 
+    entire serialization is optimized at compile time. The 'RProtoBuf' package on 
+    the other hand uses the protobuf runtime library to provide a general-purpose 
+    toolkit for reading and writing arbitrary protocol-buffer data in R.
 Version: 1.9.9000
 License: MIT + file LICENSE
-URL: https://github.com/jeroen/protolite#readme
+URL: https://jeroen.cran.dev/protolite (website)
+    https://github.com/jeroen/protolite (devel)
 BugReports: https://github.com/jeroen/protolite/issues
 SystemRequirements: libprotobuf and protobuf-compiler
 LinkingTo: Rcpp
