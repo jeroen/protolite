@@ -42,7 +42,9 @@ read_mvt_data <- function(data, as_latlon = TRUE, zxy = NULL){
 }
 
 parse_mvt_params <- function(url){
-  regex <- "^.*[-/]([0-9]+)[-/]([0-9]+)[-/]([0-9]+).[a-zA-Z0-9.]+([?#].*)?$"
+  url <- sub("\\#.*", "", url)
+  url <- sub("\\?.*", "", url)
+  regex <- "^.*[-/]([0-9]+)[-/]([0-9]+)[-/]([0-9]+)\\.[^/]*$"
   if(!is.character(url) || !length(url) || !grepl(regex, url)){
     stop("Input path does have standard /{z}/{x}/{y}.mvt format so you must provide zxy parameters manually")
   }
