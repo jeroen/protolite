@@ -17,7 +17,12 @@ test_that("Read multipolygon", {
   all.equal(attributes(mvt10$campus$geometry), attributes(campus$geometry), tol = 1e-6)
   all.equal(attributes(mvt12$campus$geometry), attributes(campus$geometry), tol = 1e-8)
 
+  # Convert to EPSG:3857 to work with st_area() without lwgeom
+  out1 <- sf::st_transform(campus, 3857)
+  out2 <- sf::st_transform(mvt10$campus, 3857)
+  out3 <- sf::st_transform(mvt12$campus, 3857)
+
   # Compare geometry data (zoom reduces accuracy)
-  expect_equal(sf::st_area(campus), st_area(mvt10$campus), tol = 1e-2)
-  expect_equal(sf::st_area(campus), st_area(mvt12$campus), tol = 1e-2)
+  expect_equal(sf::st_area(out1), sf::st_area(out2), tol = 1e-2)
+  expect_equal(sf::st_area(out1), sf::st_area(out3), tol = 1e-2)
 })
