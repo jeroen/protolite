@@ -8,10 +8,10 @@
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/protolite)](https://cran.r-project.org/package=protolite)
 [![Github Stars](https://img.shields.io/github/stars/jeroen/protolite.svg?style=social&label=Github)](https://github.com/jeroen/protolite)
 
-Pure C++ implementations for reading and writing several common data 
-formats based on Google protocol-buffers. Currently supports 'rexp.proto' for 
+Pure C++ implementations for reading and writing several common data formats 
+based on Google protocol-buffers. Currently supports 'rexp.proto' for serialized 
 R objects, 'geobuf.proto' for binary geojson, and 'mvt.proto' for vector tiles. 
-This package uses the auto-generated C++ code by protobuf-compiler, hence the 
+This package uses auto-generated C++ code by protobuf-compiler, hence the 
 entire serialization is optimized at compile time. The 'RProtoBuf' package on 
 the other hand uses the protobuf runtime library to provide a general-purpose 
 toolkit for reading and writing arbitrary protocol-buffer data in R.
