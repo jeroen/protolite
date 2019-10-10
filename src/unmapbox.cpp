@@ -36,7 +36,7 @@ static Rcpp::NumericMatrix decode_geometry(std::vector<int> geom, double extent)
   std::vector<double> xvec;
   std::vector<double> yvec;
   std::vector<int> gvec;
-  for(int i = 0; i < geom.size(); i++){
+  for(size_t i = 0; i < geom.size(); i++){
     int cmd = cmd_command(geom.at(i));
     int count = cmd_count(geom.at(i));
     //REprintf("Command: %d with count %d\n", cmd, count);

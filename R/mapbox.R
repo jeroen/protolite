@@ -6,7 +6,7 @@
 #' @name mapbox
 #' @rdname mapbox
 #' @param data url, path or raw vector with the mvt data
-#' @param zxy vector of length 3 with respsectively z (zoom), x (column) and y (row).
+#' @param zxy vector of length 3 with respectively z (zoom), x (column) and y (row).
 #' For file/url in the standard `../{z}/{x}/{y}.mvt` format, these are automatically
 #' inferred from the input path.
 #' @param as_latlon return the data as lat/lon instead of raw EPSG:3857 positions

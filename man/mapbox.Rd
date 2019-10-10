@@ -15,7 +15,7 @@ read_mvt_sf(data, crs = 4326, zxy = NULL)
 
 \item{as_latlon}{return the data as lat/lon instead of raw EPSG:3857 positions}
 
-\item{zxy}{vector of length 3 with respsectively z (zoom), x (column) and y (row).
+\item{zxy}{vector of length 3 with respectively z (zoom), x (column) and y (row).
 For file/url in the standard \verb{../\{z\}/\{x\}/\{y\}.mvt} format, these are automatically
 inferred from the input path.}
 
