@@ -43,17 +43,18 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   PKG_LIBS="-L$BREWDIR/opt/$PKG_BREW_NAME/lib $PKG_LIBS"
 fi
 
+# Find compiler
+CXX11=$(${R_HOME}/bin/R CMD config CXX11)
+CXXCPP="$CXX11 -std=gnu++11 -E"
+CPPFLAGS=$(${R_HOME}/bin/R CMD config CPPFLAGS)
+
 # For debugging
+echo "Using: $CXXCPP"
 echo "Using PKG_CFLAGS=$PKG_CFLAGS"
 echo "Using PKG_LIBS=$PKG_LIBS"
 
-# Find compiler
-CXXCPP=$(${R_HOME}/bin/R CMD config CXXCPP)
-CXXFLAGS=$(${R_HOME}/bin/R CMD config CXXFLAGS)
-CPPFLAGS=$(${R_HOME}/bin/R CMD config CPPFLAGS)
-
 # Test configuration
-echo "#include $PKG_TEST_HEADER" | ${CXXCPP} ${CPPFLAGS} ${PKG_CFLAGS} ${CXXFLAGS} -xc++ - >/dev/null
+echo "#include $PKG_TEST_HEADER" | ${CXXCPP} ${CPPFLAGS} ${PKG_CFLAGS} -xc++ - >/dev/null
 
 # Customize the error
 if [ $? -ne 0 ]; then
