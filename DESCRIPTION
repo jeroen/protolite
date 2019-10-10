@@ -19,7 +19,8 @@ SystemRequirements: libprotobuf and protobuf-compiler
 LinkingTo: Rcpp
 Imports: Rcpp (>= 0.12.12), 
     jsonlite
-Suggests: 
+Suggests:
+    spelling, 
     curl,
     testthat, 
     RProtoBuf, 
@@ -27,3 +28,4 @@ Suggests:
 RoxygenNote: 6.1.99.9001
 Roxygen: list(load = "installed", markdown = TRUE)
 Encoding: UTF-8
+Language: en-US
