@@ -1,4 +1,4 @@
-#include "mapbox.pb.h"
+#include "mvt.pb.h"
 #include <Rcpp.h>
 
 //shothands

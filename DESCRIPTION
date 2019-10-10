@@ -5,11 +5,11 @@ Author: Jeroen Ooms
 Maintainer: Jeroen Ooms <jeroen@berkeley.edu>
 Description: Pure C++ implementations for reading and writing several common data 
     formats based on Google protocol-buffers. Currently supports 'rexp.proto' for 
-    R objects, 'geobuf.proto' for binary geojson, and 'mvt.proto' for vector tiles. 
-    This package uses the auto-generated C++ code by protobuf-compiler, hence the 
-    entire serialization is optimized at compile time. The 'RProtoBuf' package on 
-    the other hand uses the protobuf runtime library to provide a general-purpose 
-    toolkit for reading and writing arbitrary protocol-buffer data in R.
+    serialized R objects, 'geobuf.proto' for binary geojson, and 'mvt.proto' for 
+    vector tiles. This package uses the auto-generated C++ code by protobuf-compiler, 
+    hence the entire serialization is optimized at compile time. The 'RProtoBuf' 
+    package on the other hand uses the protobuf runtime library to provide a general-
+    purpose toolkit for reading and writing arbitrary protocol-buffer data in R.
 Version: 2.0
 License: MIT + file LICENSE
 URL: https://jeroen.cran.dev/protolite (website)
