@@ -45,16 +45,14 @@ fi
 
 # Find compiler
 CXX11=$(${R_HOME}/bin/R CMD config CXX11)
-CXXCPP="$CXX11 -std=gnu++11 -E"
 CPPFLAGS=$(${R_HOME}/bin/R CMD config CPPFLAGS)
 
 # For debugging
-echo "Using: $CXXCPP"
 echo "Using PKG_CFLAGS=$PKG_CFLAGS"
 echo "Using PKG_LIBS=$PKG_LIBS"
 
 # Test configuration
-echo "#include $PKG_TEST_HEADER" | ${CXXCPP} ${CPPFLAGS} ${PKG_CFLAGS} -xc++ - >/dev/null
+echo "#include $PKG_TEST_HEADER" | ${CXX11} -E ${CPPFLAGS} ${PKG_CFLAGS} -xc++ - >/dev/null
 
 # Customize the error
 if [ $? -ne 0 ]; then
