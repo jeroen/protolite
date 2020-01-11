@@ -246,7 +246,7 @@ RawVector cpp_serialize_geobuf(List x, int decimals){
   for(size_t i = 0; i < keys.size(); i++){
     message.add_keys(keys.at(i));
   }
-  int size = message.ByteSize();
+  int size = message.ByteSizeLong();
   RawVector res(size);
   if(!message.SerializeToArray(res.begin(), size))
     throw std::runtime_error("Failed to serialize into geobuf message");

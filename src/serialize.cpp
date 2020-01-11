@@ -140,7 +140,7 @@ rexp::REXP rexp_object(Rcpp::RObject x, bool skip_native){
 // [[Rcpp::export]]
 Rcpp::RawVector cpp_serialize_pb(Rcpp::RObject x, bool skip_native){
   rexp::REXP message = rexp_object(x, skip_native);
-  int size = message.ByteSize();
+  int size = message.ByteSizeLong();
   Rcpp::RawVector res(size);
   if(!message.SerializeToArray(res.begin(), size))
     throw std::runtime_error("Failed to serialize into protobuf message");
