@@ -71,6 +71,11 @@ if [ $? -ne 0 ]; then
   exit 1;
 fi
 
+# Fix for deprecated declarations
+if pkg-config ${PKG_CONFIG_NAME} --atleast-version 3.6; then
+PKG_CFLAGS="$PKG_CFLAGS -DUSENEWAPI"
+fi
+
 # Write to Makevars
 sed -e "s|@cflags@|$PKG_CFLAGS|" -e "s|@libs@|$PKG_LIBS|" src/Makevars.in > src/Makevars
 
