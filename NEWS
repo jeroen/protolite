@@ -1,3 +1,7 @@
+2.1
+  - Fix build on CentOS 6 (and other systems without C++11 support)
+  - Fix for -Wdeprecated warning about ByteSize() on protobuf 3.11
+
 2.0
   - Add support for MVT: read_mvt_sf() and read_mvt_data()
 
