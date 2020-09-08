@@ -7,7 +7,6 @@ env: _R_CHECK_FORCE_SUGGESTS_=FALSE
 
 matrix:
   include:
-    - dist: trusty
     - dist: xenial
     - os: osx
       brew_packages: protobuf
