@@ -4,7 +4,7 @@ RWINLIB = ../windows/protobuf-${VERSION}
 
 PKG_CPPFLAGS= -I$(RWINLIB)/include
 PKG_LIBS= -L$(RWINLIB)/lib${subst gcc,,${COMPILED_BY}}${R_ARCH} \
-	-L$(RWINLIB)/lib${R_ARCH} \
+	-L$(RWINLIB)/lib${R_ARCH}${CRT} \
 	-lprotobuf
 
 CXX_STD=CXX11
