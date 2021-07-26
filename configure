@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 # Anticonf (tm) script by Jeroen Ooms (2020)
 # This script will query 'pkg-config' for the required cflags and ldflags.
 # If pkg-config is unavailable or does not find the library, try setting
@@ -16,10 +15,10 @@ PKG_LIBS="-lprotobuf"
 PKG_CFLAGS=""
 
 # Use pkg-config if available (except for on CRAN)
-if [ $(command -v pkg-config) ] && [ ! -e "/Volumes/SSD-Data/Builds" ]; then
-  PKGCONFIG_CFLAGS=$(pkg-config --cflags --silence-errors ${PKG_CONFIG_NAME})
-  PKGCONFIG_LIBS=$(pkg-config --libs ${PKG_CONFIG_NAME})
-  PKGCONFIG_MODVERSION=$(pkg-config --modversion --silence-errors ${PKG_CONFIG_NAME})
+if [ `command -v pkg-config` ] && [ ! -e "/Volumes/SSD-Data/Builds" ]; then
+  PKGCONFIG_CFLAGS=`pkg-config --cflags --silence-errors ${PKG_CONFIG_NAME}`
+  PKGCONFIG_LIBS=`pkg-config --libs ${PKG_CONFIG_NAME}`
+  PKGCONFIG_MODVERSION=`pkg-config --modversion --silence-errors ${PKG_CONFIG_NAME}`
 fi
 
 # Note that cflags may be empty in case of success
@@ -31,9 +30,10 @@ elif [ "$PKGCONFIG_CFLAGS" ] || [ "$PKGCONFIG_LIBS" ]; then
   echo "Found pkg-config cflags and libs!"
   PKG_CFLAGS=${PKGCONFIG_CFLAGS}
   PKG_LIBS=${PKGCONFIG_LIBS}
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-  if [ $(command -v brew) ]; then
-    BREWDIR=$(brew --prefix)
+elif [ `uname` = "Darwin" ]; then
+  brew --version 2>/dev/null
+  if [ $? -eq 0 ]; then
+    BREWDIR=`brew --prefix`
     PATH="$BREWDIR/bin:$PATH"
     PKG_CFLAGS="-I$BREWDIR/include"
     PKG_LIBS="-L$BREWDIR/lib $PKG_LIBS"
@@ -44,9 +44,9 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 fi
 
 # Find compiler
-CXX11=$(${R_HOME}/bin/R CMD config CXX11)
-CXX11STD=$(${R_HOME}/bin/R CMD config CXX11STD)
-CPPFLAGS=$(${R_HOME}/bin/R CMD config CPPFLAGS)
+CXX11=`${R_HOME}/bin/R CMD config CXX11`
+CXX11STD=`${R_HOME}/bin/R CMD config CXX11STD`
+CPPFLAGS=`${R_HOME}/bin/R CMD config CPPFLAGS`
 
 # For debugging
 echo "Using PKG_CFLAGS=$PKG_CFLAGS"
@@ -80,9 +80,9 @@ fi
 sed -e "s|@cflags@|$PKG_CFLAGS|" -e "s|@libs@|$PKG_LIBS|" src/Makevars.in > src/Makevars
 
 # Look for 'protoc' compiler
-if [ $(command -v protoc) ]; then
-  PROTOC_VERSION=$(protoc --version)
-  echo "Using ${PROTOC_VERSION} from $(command -v protoc)"
+if [ `command -v protoc` ]; then
+  PROTOC_VERSION=`protoc --version`
+  echo "Using ${PROTOC_VERSION} from `command -v protoc`"
 else
   echo "Failed to run protoc."
   echo "Please install the 'protobuf-compiler' package for your system."
@@ -90,9 +90,13 @@ else
 fi
 
 # Try to check if protoc version matches libproto
-if [[ $PROTOC_VERSION != *"$PKGCONFIG_MODVERSION"* ]]; then
-  echo "Warning: protoc version $PROTOC_VERSION might not match libproto version $PKGCONFIG_MODVERSION.";
-fi
+case $PROTOC_VERSION in
+  *"$PKGCONFIG_MODVERSION"*)
+    ;;
+  *)
+    echo "Warning: protoc version $PROTOC_VERSION might not match libproto version $PKGCONFIG_MODVERSION.";
+    ;;
+esac
 
 # Compile proto file
 cd src
