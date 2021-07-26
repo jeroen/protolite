@@ -15,7 +15,7 @@ PKG_LIBS="-lprotobuf"
 PKG_CFLAGS=""
 
 # Use pkg-config if available (except for on CRAN)
-if [ `command -v pkg-config` ] && [ ! -e "/Volumes/SSD-Data/Builds" ]; then
+if [ `command -v pkg-config` ] && [ ! -d "/Volumes/SSD-Data/Builds" ]; then
   PKGCONFIG_CFLAGS=`pkg-config --cflags --silence-errors ${PKG_CONFIG_NAME}`
   PKGCONFIG_LIBS=`pkg-config --libs ${PKG_CONFIG_NAME}`
   PKGCONFIG_MODVERSION=`pkg-config --modversion --silence-errors ${PKG_CONFIG_NAME}`
