@@ -12,8 +12,7 @@ Description: Pure C++ implementations for reading and writing several common dat
     purpose toolkit for reading and writing arbitrary protocol-buffer data in R.
 Version: 2.1.1
 License: MIT + file LICENSE
-URL: https://jeroen.cran.dev/protolite (website)
-    https://github.com/jeroen/protolite (devel)
+URL: https://github.com/jeroen/protolite
 BugReports: https://github.com/jeroen/protolite/issues
 SystemRequirements: libprotobuf and protobuf-compiler
 LinkingTo: Rcpp
