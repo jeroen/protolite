@@ -20,7 +20,7 @@ jobs:
           - {os: windows-latest, r: 'release'}
           - {os: windows-latest, r: 'devel'}
           - {os: windows-2022, r: 'devel-ucrt'}
-          - {os: macOS-latest, r: 'release', brew_packages: 'protobuf'}
+          - {os: macOS-latest, r: 'release'}
           - {os: ubuntu-16.04, r: '3.5', rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
           - {os: ubuntu-18.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/bionic/latest"}
           - {os: ubuntu-20.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
@@ -64,10 +64,6 @@ jobs:
             eval sudo $cmd
           done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "20.04"))')
           sudo apt-get install -y gsfonts
-
-      - name: Install brew packages
-        if: runner.os == 'MacOS'
-        run: brew install ${{ matrix.config.brew_packages }}
 
       - name: Install dependencies
         run: |
