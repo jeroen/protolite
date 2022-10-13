@@ -1,3 +1,6 @@
+2.1.2
+  - Compile with CXX17 when available (preferred for recent libprotobuf)
+
 2.1.1
   - Support rwinlib ucrt libs
   - Rewrite configure script to not use bash

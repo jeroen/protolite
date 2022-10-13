@@ -43,22 +43,33 @@ elif [ `uname` = "Darwin" ]; then
   fi
 fi
 
-# Find compiler
-CXX11=`${R_HOME}/bin/R CMD config CXX11`
-CXX11STD=`${R_HOME}/bin/R CMD config CXX11STD`
-CPPFLAGS=`${R_HOME}/bin/R CMD config CPPFLAGS`
-
 # For debugging
 echo "Using PKG_CFLAGS=$PKG_CFLAGS"
 echo "Using PKG_LIBS=$PKG_LIBS"
 
+# Use CXX17 if available (preferred for recent libprotobuf)
+CXX17=`${R_HOME}/bin/R CMD config CXX17` || unset CXX17
+
+if [ "$CXX17" ]; then
+echo "Found C++17 compiler: $CXX17"
+CXX_STD=CXX17
+CXX="$CXX17 `${R_HOME}/bin/R CMD config CXX17STD`"
+CXXFLAGS=`${R_HOME}/bin/R CMD config CXX17FLAGS`
+else
+echo "Using default C++ compiler"
+CXX_STD=CXX11
+CXX=`${R_HOME}/bin/R CMD config CXX`
+CXXFLAGS=`${R_HOME}/bin/R CMD config CXXFLAGS`
+fi
+
 # Test configuration
-echo "#include $PKG_TEST_HEADER" | ${CXX11} ${CXX11STD} -E ${CPPFLAGS} ${PKG_CFLAGS} -xc++ - >/dev/null
+CPPFLAGS=`${R_HOME}/bin/R CMD config CPPFLAGS`
+echo "#include $PKG_TEST_HEADER" | ${CXX} -E ${CPPFLAGS} ${PKG_CFLAGS} ${CXXFLAGS} -xc++ - >/dev/null 2>configure.log
 
 # Customize the error
 if [ $? -ne 0 ]; then
-  echo "------------------------- ANTICONF ERROR ---------------------------"
-  echo "Configuration failed because $PKG_CONFIG_NAME was not found. Try installing:"
+  echo "------------------------------[ ANTICONF ]-----------------------------"
+  echo "Configuration failed to find $PKG_CONFIG_NAME. Try installing:"
   echo " * deb: $PKG_DEB_NAME (Debian, Ubuntu, etc)"
   echo " * rpm: $PKG_RPM_NAME (Fedora, EPEL)"
   echo " * csw: $PKG_CSW_NAME (Solaris)"
@@ -67,9 +78,14 @@ if [ $? -ne 0 ]; then
   echo "PATH and PKG_CONFIG_PATH contains a $PKG_CONFIG_NAME.pc file. If pkg-config"
   echo "is unavailable you can set INCLUDE_DIR and LIB_DIR manually via:"
   echo "R CMD INSTALL --configure-vars='INCLUDE_DIR=... LIB_DIR=...'"
-  echo "--------------------------------------------------------------------"
-  exit 1;
+  echo "----------------------------[ ERROR MESSAGE ]----------------------------"
+  cat configure.log
+  echo "------------------------------------------------------------------------"
+  exit 1
 fi
+
+# Write to Makevars
+sed -e "s|@cflags@|$PKG_CFLAGS|" -e "s|@libs@|$PKG_LIBS|" -e "s|CXX11|${CXX_STD}|" src/Makevars.in > src/Makevars
 
 # Fix for deprecated declarations
 if pkg-config ${PKG_CONFIG_NAME} --atleast-version 3.6; then

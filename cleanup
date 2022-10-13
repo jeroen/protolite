@@ -2,4 +2,4 @@
 for file in src/*.proto; do
   echo "#error This is a placeholder file." > ${file%.proto}.pb.cc
 done
-rm -f src/Makevars autobrew
+rm -f src/Makevars autobrew configure.log

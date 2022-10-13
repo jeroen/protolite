@@ -9,3 +9,4 @@ src/*.pb.cc
 src/Makevars
 inst/doc
 windows
+configure.log
