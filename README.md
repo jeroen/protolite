@@ -2,11 +2,8 @@
 
 > Highly Optimized Protocol Buffer Serializers
 
-[![Build Status](https://travis-ci.org/jeroen/protolite.svg?branch=master)](https://travis-ci.org/jeroen/protolite)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/jeroen/protolite?branch=master&svg=true)](https://ci.appveyor.com/project/jeroen/protolite)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/protolite)](https://cran.r-project.org/package=protolite)
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/protolite)](https://cran.r-project.org/package=protolite)
-[![Github Stars](https://img.shields.io/github/stars/jeroen/protolite.svg?style=social&label=Github)](https://github.com/jeroen/protolite)
 
 Pure C++ implementations for reading and writing several common data formats 
 based on Google protocol-buffers. Currently supports 'rexp.proto' for serialized 
@@ -23,7 +20,7 @@ This small package contains optimized C++ implementations for reading and writin
 
 To extend the package with additional formats, put your `.proto` file in the `src` directory. The package configure script will automatically generate the code and header file to include in your C++ bindings.
 
-The protolite package is much faster than RProtoBuf because it binds directly to [generated C++](https://developers.google.com/protocol-buffers/docs/reference/cpp-generated) code from the `protoc` compiler. RProtoBuf on the other hand uses the more flexible but slower reflection-based interface, which parses the descriptors at runtime. With RProtoBuf you can create new protocol buffers of a schema, read in arbitrary .proto files, manipulate fields, and generate / parse .prototext ascii format protocol buffers. For more details have a look at our paper: [*RProtoBuf: Efficient Cross-Language Data Serialization in R*](http://arxiv.org/abs/1401.7372).
+The protolite package is much faster than RProtoBuf because it binds directly to [generated C++](https://developers.google.com/protocol-buffers/docs/reference/cpp-generated) code from the `protoc` compiler. RProtoBuf on the other hand uses the more flexible but slower reflection-based interface, which parses the descriptors at runtime. With RProtoBuf you can create new protocol buffers of a schema, read in arbitrary .proto files, manipulate fields, and generate / parse .prototext ascii format protocol buffers. For more details have a look at our paper: [*RProtoBuf: Efficient Cross-Language Data Serialization in R*](https://arxiv.org/abs/1401.7372).
 
 ## Serializing R objects
 
@@ -82,13 +79,13 @@ Installation from source on Linux or OSX requires Google's [Protocol Buffers](ht
 sudo apt-get install -y libprotobuf-dev protobuf-compiler
 ```
 
-On __Fedora__ we need [protobuf-devel](https://apps.fedoraproject.org/packages/protobuf-devel):
+On __Fedora__ we need [protobuf-devel](https://src.fedoraproject.org/rpms/protobuf):
 
 ```
 sudo yum install protobuf-devel
 ````
 
-On __CentOS / RHEL__ we install [protobuf-devel](https://apps.fedoraproject.org/packages/protobuf-devel) via EPEL:
+On __CentOS / RHEL__ we install [protobuf-devel](https://src.fedoraproject.org/rpms/protobuf) via EPEL:
 
 ```
 sudo yum install epel-release
