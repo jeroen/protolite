@@ -50,10 +50,10 @@ echo "Using PKG_LIBS=$PKG_LIBS"
 CXX17=`${R_HOME}/bin/R CMD config CXX17` || unset CXX17
 
 if [ "$CXX17" ]; then
-echo "Found C++17 compiler: $CXX17"
 CXX_STD=CXX17
 CXX="$CXX17 `${R_HOME}/bin/R CMD config CXX17STD`"
 CXXFLAGS=`${R_HOME}/bin/R CMD config CXX17FLAGS`
+echo "Using C++17 compiler: $CXX"
 else
 echo "Using default C++ compiler"
 CXX_STD=CXX11
