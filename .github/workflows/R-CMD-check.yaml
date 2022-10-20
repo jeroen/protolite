@@ -37,10 +37,6 @@ jobs:
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
 
-      - if: runner.os == 'linux'
-        run: sudo apt-get install libprotobuf-dev protobuf-compiler
-        shell: bash
-
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::rcmdcheck

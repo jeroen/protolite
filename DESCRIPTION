@@ -22,7 +22,6 @@ Suggests:
     spelling, 
     curl,
     testthat, 
-    RProtoBuf, 
     sf
 RoxygenNote: 6.1.99.9001
 Roxygen: list(load = "installed", markdown = TRUE)
