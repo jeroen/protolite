@@ -8,7 +8,6 @@ PKG_LIBS= -L$(RWINLIB)/lib${subst gcc,,${COMPILED_BY}}${R_ARCH} \
 	-lprotobuf
 
 CXX_STD=CXX11
-PKG_CXXFLAGS = -Wno-long-long
 
 all: clean winlibs
 
