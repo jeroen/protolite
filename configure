@@ -82,16 +82,13 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-# Write to Makevars
-sed -e "s|@cflags@|$PKG_CFLAGS|" -e "s|@libs@|$PKG_LIBS|" -e "s|CXX11|${CXX_STD}|" src/Makevars.in > src/Makevars
-
 # Fix for deprecated declarations
 if pkg-config ${PKG_CONFIG_NAME} --atleast-version 3.6; then
 PKG_CFLAGS="$PKG_CFLAGS -DUSENEWAPI"
 fi
 
 # Write to Makevars
-sed -e "s|@cflags@|$PKG_CFLAGS|" -e "s|@libs@|$PKG_LIBS|" src/Makevars.in > src/Makevars
+sed -e "s|@cflags@|$PKG_CFLAGS|" -e "s|@libs@|$PKG_LIBS|" -e "s|CXX11|${CXX_STD}|" src/Makevars.in > src/Makevars
 
 # Look for 'protoc' compiler
 if [ `command -v protoc` ]; then
