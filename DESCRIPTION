@@ -23,7 +23,7 @@ Suggests:
     curl,
     testthat, 
     sf
-RoxygenNote: 6.1.99.9001
 Roxygen: list(load = "installed", markdown = TRUE)
 Encoding: UTF-8
 Language: en-US
+RoxygenNote: 7.2.1
