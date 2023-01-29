@@ -1,5 +1,6 @@
 2.2.0
   - Windows: update to libprotobuf 3.12.4
+  - No longer force CXX11 (use local C++ default std)
 
 2.1.3
   - Fix bug in 2.1.2 release (actually compile with CXX17)
