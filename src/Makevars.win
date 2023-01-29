@@ -1,8 +1,8 @@
 # ProtoBuf Version
-VERSION = 3.8.0
+VERSION = 3.12.4
 RWINLIB = ../windows/protobuf-${VERSION}
 
-PKG_CPPFLAGS= -I$(RWINLIB)/include
+PKG_CPPFLAGS= -I$(RWINLIB)/include -DUSENEWAPI
 PKG_LIBS= -L$(RWINLIB)/lib${subst gcc,,${COMPILED_BY}}${R_ARCH} \
 	-L$(RWINLIB)/lib${R_ARCH}${CRT} \
 	-lprotobuf
