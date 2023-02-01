@@ -50,15 +50,13 @@ echo "Using PKG_LIBS=$PKG_LIBS"
 CXX17=`${R_HOME}/bin/R CMD config CXX17` || unset CXX17
 
 if [ "$CXX17" ]; then
-CXX_STD=CXX17
 CXX="$CXX17 `${R_HOME}/bin/R CMD config CXX17STD`"
 CXXFLAGS=`${R_HOME}/bin/R CMD config CXX17FLAGS`
-echo "Using C++17 compiler: $CXX"
+echo "Found C++17 compiler: $CXX $CXXFLAGS"
 else
-echo "Using default C++ compiler"
-CXX_STD=CXX11
 CXX=`${R_HOME}/bin/R CMD config CXX`
 CXXFLAGS=`${R_HOME}/bin/R CMD config CXXFLAGS`
+echo "Using default C++ compiler: $CXX $CXXFLAGS"
 fi
 
 # Test configuration
@@ -88,7 +86,7 @@ PKG_CFLAGS="$PKG_CFLAGS -DUSENEWAPI"
 fi
 
 # Write to Makevars
-sed -e "s|@cflags@|$PKG_CFLAGS|" -e "s|@libs@|$PKG_LIBS|" -e "s|CXX11|${CXX_STD}|" src/Makevars.in > src/Makevars
+sed -e "s|@cflags@|$PKG_CFLAGS|" -e "s|@libs@|$PKG_LIBS|" src/Makevars.in > src/Makevars
 
 # Look for 'protoc' compiler
 if [ `command -v protoc` ]; then
