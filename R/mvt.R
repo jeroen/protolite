@@ -94,13 +94,13 @@ mvt_sf_point <- function(mat){
   if(nrow(mat) == 1){
     sf::st_point(mat[1:2])
   } else {
-    sf::st_multipoint(mat[,1:2])
+    sf::st_multipoint(mat[,1:2, drop = FALSE])
   }
 }
 
 mvt_sf_linestring <- function(mat){
   if(all_equal(mat[,3])){
-    sf::st_linestring(mat[,1:2])
+    sf::st_linestring(mat[,1:2, drop = FALSE])
   } else {
     sf::st_multilinestring(split_matrix_groups(mat))
   }
