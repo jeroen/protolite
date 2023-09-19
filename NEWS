@@ -1,3 +1,6 @@
+2.3.0
+  - Windows: update to protobuf 21.12
+
 2.2.0
   - Windows: update to libprotobuf 3.19.4
   - No longer force CXX11 (use local C++ default std)

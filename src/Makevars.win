@@ -1,23 +1,15 @@
-# ProtoBuf Version
-VERSION = 3.19.4
-
-# Need older build for R < 4.0
-ifeq ($(R_COMPILED_BY),gcc 4.9.3)
-VERSION = 3.12.4
-endif
-
-RWINLIB = ../windows/protobuf-${VERSION}
-
+RWINLIB = ../windows/protobuf
 PKG_CPPFLAGS= -I$(RWINLIB)/include -DUSENEWAPI
 PKG_LIBS= -L$(RWINLIB)/lib${subst gcc,,${COMPILED_BY}}${R_ARCH} \
-	-L$(RWINLIB)/lib${R_ARCH}${CRT} \
+	-L$(RWINLIB)/lib \
 	-lprotobuf
+BINDIR=$(RWINLIB)/bin$(subst 64,,$(WIN))
 
 all: clean winlibs
 
 winlibs:
-	"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" "../tools/winlibs.R" $(VERSION)
-	"${RWINLIB}/bin$(WIN)/protoc" *.proto --cpp_out=.
+	"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" "../tools/winlibs.R"
+	"${BINDIR}/protoc" *.proto --cpp_out=.
 
 clean:
 	rm -f $(OBJECTS) $(SHLIB) *.pb.cc *.pb.h

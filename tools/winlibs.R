@@ -1,9 +1,16 @@
-# Build against protobuf libs compiled with Rtools
-VERSION <- commandArgs(TRUE)
-if (!file.exists(sprintf("../windows/protobuf-%s/include/google/protobuf/descriptor.h", VERSION))) {
-    if (getRversion() < "3.3.0") setInternet2()
-    download.file(sprintf("https://github.com/rwinlib/protobuf/archive/%s.zip", VERSION), "lib.zip", quiet = TRUE)
-    dir.create("../windows", showWarnings = FALSE)
-    unzip("lib.zip", exdir = "../windows")
-    unlink("lib.zip")
+if(!file.exists("../windows/protobuf/include/google/protobuf/descriptor.h")){
+  unlink("../windows", recursive = TRUE)
+  url <- if(grepl("aarch", R.version$platform)){
+    "https://github.com/r-windows/bundles/releases/download/protobuf-21.12/protobuf-21.12-clang-aarch64.tar.xz"
+  } else if(getRversion() >= "4.2") {
+    "https://github.com/r-windows/bundles/releases/download/protobuf-21.12/protobuf-21.12-ucrt-x86_64.tar.xz"
+  } else {
+    "https://github.com/rwinlib/protobuf/archive/v3.19.4-2.tar.gz"
+  }
+  download.file(url, basename(url), quiet = TRUE)
+  dir.create("../windows", showWarnings = FALSE)
+  untar(basename(url), exdir = "../windows", tar = 'internal')
+  unlink(basename(url))
+  setwd("../windows")
+  file.rename(list.files(), 'protobuf')
 }
