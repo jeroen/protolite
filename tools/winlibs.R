@@ -2,7 +2,8 @@ if(!file.exists("../windows/protobuf/include/google/protobuf/descriptor.h")){
   unlink("../windows", recursive = TRUE)
   url <- if(grepl("aarch", R.version$platform)){
     "https://github.com/r-windows/bundles/releases/download/protobuf-21.12/protobuf-21.12-clang-aarch64.tar.xz"
-  } else if(getRversion() >= "4.2") {
+  } else if(getRversion() >= "4.3") {
+    # NB: does not work with rtools42
     "https://github.com/r-windows/bundles/releases/download/protobuf-21.12/protobuf-21.12-ucrt-x86_64.tar.xz"
   } else {
     "https://github.com/rwinlib/protobuf/archive/v3.19.4-2.tar.gz"
