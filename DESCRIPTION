@@ -2,7 +2,7 @@ Package: protolite
 Type: Package
 Title: Highly Optimized Protocol Buffer Serializers
 Author: Jeroen Ooms
-Maintainer: Jeroen Ooms <jeroen@berkeley.edu>
+Maintainer: Jeroen Ooms <jeroenooms@gmail.com>
 Description: Pure C++ implementations for reading and writing several common data 
     formats based on Google protocol-buffers. Currently supports 'rexp.proto' for 
     serialized R objects, 'geobuf.proto' for binary geojson, and 'mvt.proto' for 
