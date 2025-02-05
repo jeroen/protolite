@@ -2,6 +2,7 @@ PKG_CONFIG_NAME = protobuf
 PKG_CONFIG ?= $(BINPREF)pkg-config
 PKG_LIBS := $(shell $(PKG_CONFIG) --libs $(PKG_CONFIG_NAME))
 PROTOC_VERSION := $(shell protoc --version)
+PROTOCS = geobuf.pb.h mvt.pb.h rexp.pb.h
 
 ifneq ($(PKG_LIBS),)
 ifneq ($(PROTOC_VERSION),)
@@ -19,14 +20,14 @@ endif
 
 all: $(SHLIB)
 
-$(OBJECTS): $(RWINLIB) protocs
+$(OBJECTS): $(RWINLIB) $(PROTOCS)
 
 $(RWINLIB):
 	"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" "../tools/winlibs.R"
 
-protocs:
+$(PROTOCS):
 	"$(PROTOC_DIR)protoc" *.proto --cpp_out=.
 
 clean:
-	rm -f $(OBJECTS) $(SHLIB) *.pb.cc *.pb.h
+	rm -f $(OBJECTS) $(SHLIB) $(PROTOCS) *.pb.cc
 	(cd ..; sh cleanup)
