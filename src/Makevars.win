@@ -1,16 +1,33 @@
+PKG_CONFIG_NAME = protobuf
+PKG_CONFIG ?= $(BINPREF)pkg-config
+PKG_LIBS := $(shell $(PKG_CONFIG) --libs $(PKG_CONFIG_NAME))
+PROTOC_VERSION := $(shell protoc --version)
+PROTOCS = geobuf.pb.h mvt.pb.h rexp.pb.h
+
+ifneq ($(PKG_LIBS),)
+ifneq ($(PROTOC_VERSION),)
+$(info using $(PKG_CONFIG_NAME) and $(PROTOC_VERSION) from Rtools)
+PKG_CPPFLAGS := $(subst -Wnon-virtual-dtor,,$(shell $(PKG_CONFIG) --cflags $(PKG_CONFIG_NAME))) -DUSENEWAPI
+endif
+endif
+
+ifeq ($(PKG_CPPFLAGS),)
 RWINLIB = ../windows/protobuf
-PKG_CPPFLAGS= -I$(RWINLIB)/include -DUSENEWAPI
-PKG_LIBS= -L$(RWINLIB)/lib${subst gcc,,${COMPILED_BY}}${R_ARCH} \
-	-L$(RWINLIB)/lib \
-	-lprotobuf
-BINDIR=$(RWINLIB)/bin$(subst 64,,$(WIN))
+PKG_CPPFLAGS = -I$(RWINLIB)/include -DUSENEWAPI
+PKG_LIBS = -L$(RWINLIB)/lib${subst gcc,,${COMPILED_BY}}${R_ARCH} -L$(RWINLIB)/lib -lprotobuf
+PROTOC_DIR = $(RWINLIB)/bin$(subst 64,,$(WIN))/
+endif
 
-all: clean winlibs
+all: $(SHLIB)
 
-winlibs:
+$(OBJECTS): $(RWINLIB) $(PROTOCS)
+
+$(RWINLIB):
 	"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" "../tools/winlibs.R"
-	"${BINDIR}/protoc" *.proto --cpp_out=.
+
+$(PROTOCS):
+	"$(PROTOC_DIR)protoc" *.proto --cpp_out=.
 
 clean:
-	rm -f $(OBJECTS) $(SHLIB) *.pb.cc *.pb.h
+	rm -f $(OBJECTS) $(SHLIB) $(PROTOCS) *.pb.cc
 	(cd ..; sh cleanup)

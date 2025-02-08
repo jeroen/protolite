@@ -1,3 +1,6 @@
+2.4.0
+  - Windows: use protobuf from Rtools if available
+
 2.3.0
   - Windows: update to protobuf 21.12
 
